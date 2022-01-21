@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mr_and_mrs/Addresschanger.dart';
 import 'package:mr_and_mrs/Helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mr_and_mrs/cartvalue.dart';

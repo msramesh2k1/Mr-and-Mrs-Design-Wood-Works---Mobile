@@ -39,18 +39,13 @@ class _LoginState extends State<Login> {
     //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     //     statusBarColor: Colors.black,
     //     statusBarIconBrightness: Brightness.dark));
-    
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body:smallscreen()
-        
-    
-    );
+
+    return Scaffold(resizeToAvoidBottomInset: false, body: smallscreen());
   }
 
   Widget smallscreen() {
-   return Container(
-     color: Colors.white,
+    return Container(
+      color: Colors.white,
       // decoration: BoxDecoration(
       //     image: DecorationImage(
       //         image: new NetworkImage(
@@ -61,8 +56,6 @@ class _LoginState extends State<Login> {
         child: Container(
           child: Padding(
             padding: const EdgeInsets.only(top: 75.0),
-           
-             
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -97,53 +90,52 @@ class _LoginState extends State<Login> {
                   color: kPrimaryColor,
                   width: 80,
                 ),
-               
-               
                 Padding(
-                  padding: const EdgeInsets.only(top:30.0,left: 20,right: 20),
+                  padding:
+                      const EdgeInsets.only(top: 30.0, left: 20, right: 20),
                   child: Container(
-                  decoration: BoxDecoration(
-                  
-                    borderRadius: BorderRadius.circular(10),color: Colors.teal[200].withOpacity(0.4)),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.teal[200]?.withOpacity(0.4)),
                       padding:
                           EdgeInsets.only(top: 40.0, left: 10.0, right: 10.0),
                       child: Column(
                         children: <Widget>[
                           Container(
-                             decoration: BoxDecoration(
-                  
-                    borderRadius: BorderRadius.circular(4),color: Colors.teal[50]),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: Colors.teal[50]),
                             child: Padding(
-                              padding: const EdgeInsets.only(left:20.0),
+                              padding: const EdgeInsets.only(left: 20.0),
                               child: TextFormField(
                                 style: TextStyle(color: kBackgroundColor),
                                 cursorColor: kBackgroundColor,
                                 controller: emailcontroller,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
-                                  
                                     labelText: 'Email',
                                     // labelStyle: TextStyle(
                                     //     fontFamily: 'lato',
                                     //     fontWeight: FontWeight.bold,
                                     //     color: kBackgroundColor),
-                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent)),
                                     focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.transparent))),
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent))),
                               ),
                             ),
                           ),
                           SizedBox(height: 20.0),
                           Container(
-                               decoration: BoxDecoration(
-                  
-                    borderRadius: BorderRadius.circular(4),color:Colors.teal[50]),
-                          
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: Colors.teal[50]),
                             child: Padding(
-                              padding: const EdgeInsets.only(left:20.0),
+                              padding: const EdgeInsets.only(left: 20.0),
                               child: TextField(
-                                      style: TextStyle(color: kBackgroundColor),
+                                style: TextStyle(color: kBackgroundColor),
                                 controller: passwordcontroller,
                                 decoration: InputDecoration(
                                     suffixIcon: IconButton(
@@ -158,16 +150,17 @@ class _LoginState extends State<Login> {
                                         });
                                       },
                                     ),
-                                  labelText: 'Password',
+                                    labelText: 'Password',
                                     // labelStyle: TextStyle(
                                     //     fontFamily: 'JosefinSans',
                                     //     fontWeight: FontWeight.bold,
                                     //     color: kBackgroundColor),
-                                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent)),
                                     focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.transparent))
-                                  ),
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent))),
                                 obscureText: !_password,
                                 cursorColor: kBackgroundColor,
                               ),
@@ -195,7 +188,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
-                        SizedBox(height: 20.0),
+                          SizedBox(height: 20.0),
                           Center(
                             child: GestureDetector(
                               onTap: () {
@@ -211,11 +204,11 @@ class _LoginState extends State<Login> {
                                         });
                               },
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 60.0, right: 60),
+                                padding: const EdgeInsets.only(
+                                    left: 60.0, right: 60),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      color:kBackgroundColor,
+                                      color: kBackgroundColor,
                                       borderRadius: BorderRadius.circular(4)),
                                   height: 45,
                                   //  width:20,
@@ -270,8 +263,7 @@ class _LoginState extends State<Login> {
                           style: GoogleFonts.josefinSans(
                             textStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: kBackgroundColor
-                                ,
+                                color: kBackgroundColor,
                                 fontSize: 16,
                                 letterSpacing: 0),
                           ),
@@ -287,9 +279,10 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-Widget largescreen(){
- return Container(
-     color: kBackgroundColor,
+
+  Widget largescreen() {
+    return Container(
+      color: kBackgroundColor,
       // decoration: BoxDecoration(
       //     image: DecorationImage(
       //         image: new NetworkImage(
@@ -300,8 +293,6 @@ Widget largescreen(){
         child: Container(
           child: Padding(
             padding: const EdgeInsets.only(top: 75.0),
-           
-             
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -336,52 +327,49 @@ Widget largescreen(){
                   color: kPrimaryColor,
                   width: 80,
                 ),
-               
-               
                 Padding(
-                  padding: const EdgeInsets.only(top:30.0,left: 100,right: 100),
+                  padding:
+                      const EdgeInsets.only(top: 30.0, left: 100, right: 100),
                   child: Container(
-                  decoration: BoxDecoration(
-                  
-                    borderRadius: BorderRadius.circular(10),color: kCaptionColor),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: kCaptionColor),
                       padding:
                           EdgeInsets.only(top: 30.0, left: 10.0, right: 10.0),
                       child: Column(
                         children: <Widget>[
                           Container(
-                             decoration: BoxDecoration(
-                  
-                    borderRadius: BorderRadius.circular(4),color: kCaptionColor),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: kCaptionColor),
                             child: Padding(
-                              padding: const EdgeInsets.only(left:20.0),
+                              padding: const EdgeInsets.only(left: 20.0),
                               child: TextField(
                                 style: TextStyle(color: kBackgroundColor),
                                 cursorColor: kBackgroundColor,
                                 controller: emailcontroller,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
-                                  
                                     labelText: 'EMAIL',
                                     labelStyle: TextStyle(
                                         fontFamily: 'lato',
                                         fontWeight: FontWeight.bold,
                                         color: kBackgroundColor),
                                     focusedBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: kBackgroundColor))),
+                                        borderSide: BorderSide(
+                                            color: kBackgroundColor))),
                               ),
                             ),
                           ),
                           SizedBox(height: 20.0),
                           Container(
-                               decoration: BoxDecoration(
-                  
-                    borderRadius: BorderRadius.circular(4),color:kCaptionColor),
-                          
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: kCaptionColor),
                             child: Padding(
-                              padding: const EdgeInsets.only(left:20.0),
+                              padding: const EdgeInsets.only(left: 20.0),
                               child: TextField(
-                                      style: TextStyle(color: kBackgroundColor),
+                                style: TextStyle(color: kBackgroundColor),
                                 controller: passwordcontroller,
                                 decoration: InputDecoration(
                                     suffixIcon: IconButton(
@@ -402,8 +390,8 @@ Widget largescreen(){
                                         fontWeight: FontWeight.bold,
                                         color: kBackgroundColor),
                                     focusedBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: kBackgroundColor))),
+                                        borderSide: BorderSide(
+                                            color: kBackgroundColor))),
                                 obscureText: !_password,
                                 cursorColor: kBackgroundColor,
                               ),
@@ -431,7 +419,7 @@ Widget largescreen(){
                               ),
                             ),
                           ),
-                        SizedBox(height: 20.0),
+                          SizedBox(height: 20.0),
                           Center(
                             child: GestureDetector(
                               onTap: () {
@@ -447,15 +435,14 @@ Widget largescreen(){
                                         });
                               },
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 60.0, right: 60),
+                                padding: const EdgeInsets.only(
+                                    left: 60.0, right: 60),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      color:kBackgroundColor,
+                                      color: kBackgroundColor,
                                       borderRadius: BorderRadius.circular(4)),
                                   height: 45,
-                                   width:120,
-
+                                  width: 120,
                                   child: Center(
                                     child: Text(
                                       "LOGIN",
@@ -521,8 +508,8 @@ Widget largescreen(){
         ),
       ),
     );
+  }
 
-}
   Future<void> _loginform() async {
     User firebaseUser;
     await auth

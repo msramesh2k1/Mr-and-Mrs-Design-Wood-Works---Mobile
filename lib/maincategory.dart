@@ -165,11 +165,11 @@ class _shopbycategoryState extends State<shopbycategory> {
               height: MediaQuery.of(context).size.height-128,
               decoration: BoxDecoration(
                   color: Colors.grey[200], borderRadius: BorderRadius.circular(5)),
-              child: StreamBuilder(
+              child: StreamBuilder<QuerySnapshot>(
                   stream:
                       FirebaseFirestore.instance.collection("Items").snapshots(),
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
+                    if (snapshot.hasData) {
                       return Text(
                         'No Data...',
                       );

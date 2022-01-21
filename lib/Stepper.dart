@@ -255,7 +255,7 @@ class _stepperState extends State<stepper> {
           title: Text("Place Order"),
           content: PaymentPage(
             addressId: id,
-            totalAmount: totalAmount.toDouble(),
+            totalAmount: totalAmount.toDouble(), key: null,
           ),
           state: StepState.indexed,
           isActive: true)

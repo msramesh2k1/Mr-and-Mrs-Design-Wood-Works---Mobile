@@ -55,7 +55,7 @@ class ItemModel {
 class PublishedDate {
   String date;
 
-  PublishedDate({this.date});
+  PublishedDate({ this.date});
 
   PublishedDate.fromJson(Map<String, dynamic> json) {
     date = json['$date'];

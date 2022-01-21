@@ -22,7 +22,7 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentpageState extends State<PaymentPage> {
-   int totalAmount = 0;
+  num totalAmount = 0;
   int quanity = 1;
   int cartno = 0;
 
@@ -231,14 +231,14 @@ class _PaymentpageState extends State<PaymentPage> {
                                                     child: Container(
                               color: Colors.white,
                               height:MediaQuery.of(context).size.height * 0.4,
-                              child: StreamBuilder(
+                              child: StreamBuilder<QuerySnapshot>(
                                   stream: FirebaseFirestore.instance
                                       .collection("users")
                                       .doc(MRANDMRS.sharedprefs.getString("uid"))
                                       .collection("cart")
                                       .snapshots(),
                                   builder: (context, snapshot) {
-                                    if (!snapshot.hasData) {
+                                    if (snapshot.hasData) {
                                       return Text(
                                         'Loading...',
                                       );
@@ -590,7 +590,7 @@ class _PaymentpageState extends State<PaymentPage> {
                   .where("id", isEqualTo: widget.addressId)
                   .snapshots(),
               builder: (context, snapshot) {
-                return !snapshot.hasData
+                return snapshot.hasData
                     ? Center(
                         child: CircularProgressIndicator(),
                       )

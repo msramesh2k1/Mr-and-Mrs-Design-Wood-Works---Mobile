@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mr_and_mrs/Helper.dart';
-import 'package:mr_and_mrs/HomScreen.dart';
+import 'package:mr_and_mrs/HomeScreen.dart';
 import 'package:mr_and_mrs/MainScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -63,9 +63,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light
- ));
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light));
     return OrientationBuilder(
       builder: (context, orientation) {
         return orientation == Orientation.portrait
@@ -77,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Widget smallscreen() {
     return Scaffold(
-          body: Container(
+      body: Container(
         color: Colors.white,
         child: Center(
           child: Column(

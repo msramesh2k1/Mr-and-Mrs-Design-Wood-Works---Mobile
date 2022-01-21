@@ -148,7 +148,7 @@
 //                     mainAxisAlignment: MainAxisAlignment.center,
 //                     children: [
 //                       Text(
-//                                     "Oops!!",
+//                                     "Oops!",
 //                                     style: GoogleFonts.josefinSans(
 //                                       textStyle: TextStyle(
 //                                           fontWeight: FontWeight.w600,
@@ -763,13 +763,13 @@ class _ordersState extends State<Orders> {
                       child: Container(
         color: Colors.white,
         // height: 1050,
-        child: StreamBuilder(
+        child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("orders").doc(MRANDMRS.sharedprefs.getString("uid")).collection("items")
                   
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) {
+                if (snapshot.hasData) {
                   return Text(
                     'Loading',
                   );
@@ -882,7 +882,7 @@ class _ordersState extends State<Orders> {
                           .where("id", isEqualTo: snapshot.data.docs[index]["address"].toString())
                           .snapshots(),
                       builder: (context, snapshot) {
-                        return !snapshot.hasData
+                        return snapshot.hasData
                             ? Center(
                                 child: CircularProgressIndicator(),
                               )
@@ -984,7 +984,7 @@ class _ordersState extends State<Orders> {
                                                         BorderRadius.circular(5)),
                                                 child: Container(
                                                   height: 150,
-                                                  child: StreamBuilder(
+                                                  child: StreamBuilder<QuerySnapshot>(
                                                       stream:
                                                       
                                                       FirebaseFirestore.instance.
@@ -993,7 +993,7 @@ class _ordersState extends State<Orders> {
                                                                 ["id"]).collection("items").snapshots()
                                                      ,
                                                       builder: (context, snapshot) {
-                                                        if (!snapshot.hasData) {
+                                                        if (snapshot.hasData) {
                                                           return Text(
                                                             'Loading',
                                                           );
