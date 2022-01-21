@@ -36,12 +36,36 @@ class _HomeScreenState extends State<HomeScreen> {
       width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Logo(),
-          
-        ],
+        children: [Logo(), top_navi()],
       ),
       color: Colors.white,
+    );
+  }
+}
+
+class top_navi extends StatelessWidget {
+  const top_navi({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Icon(Icons.search_sharp),
+        SizedBox(
+          width: 20,
+        ),
+        Icon(Icons.account_circle_outlined),
+        SizedBox(
+          width: 20,
+        ),
+        Icon(Icons.shopping_cart_outlined),
+        SizedBox(
+          width: 20,
+        )
+      ],
     );
   }
 }
@@ -54,7 +78,7 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.only(left: 20.0, top: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
