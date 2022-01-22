@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mr_and_mrs/Widgets/Custom_Widgets.dart';
 import 'package:mr_and_mrs/Widgets/Responsive_widget.dart';
+import 'package:video_player/video_player.dart';
 
 import 'constants.dart';
 
@@ -12,6 +14,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  VideoPlayerController videoPlayerController;
+  ScrollController _scrollController;
+  double pixels = 0;
+  @override
+  void initState() {
+    super.initState();
+    videoPlayerController = VideoPlayerController.asset("assets/videos/bg1.mp4")
+      ..initialize().then((_) {
+        videoPlayerController.play();
+        videoPlayerController.setLooping(true);
+        setState(() {});
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,18 +49,94 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget mobile() {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [Logo(), top_navi()],
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Logo(),
+            TopNavi(),
+            Box(height: 20, width: 0),
+            VideoBox(
+                context: context, videoPlayerController: videoPlayerController),
+          ],
+        ),
       ),
       color: Colors.white,
     );
   }
 }
 
-class top_navi extends StatelessWidget {
-  const top_navi({
+class VideoBox extends StatelessWidget {
+  const VideoBox({
+    Key key,
+    @required this.context,
+    @required this.videoPlayerController,
+  }) : super(key: key);
+
+  final BuildContext context;
+  final VideoPlayerController videoPlayerController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            height: 500,
+            width: MediaQuery.of(context).size.width - 40,
+            child: videoPlayerController.value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: videoPlayerController.value.aspectRatio,
+                    child: VideoPlayer(videoPlayerController),
+                  )
+                : Container(),
+          ),
+          Positioned(
+            bottom: 130,
+            child: Text(
+              "Reimagine your place \nwith Modern Furnitures",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                    fontSize: 19,
+                    letterSpacing: 1),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 60,
+            child: Container(
+              child: Center(
+                child: Text(
+                  "EXPLORE",
+                  style: GoogleFonts.openSans(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 15,
+                        letterSpacing: 1),
+                  ),
+                ),
+              ),
+              height: 40,
+              width: 130,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 2)),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class TopNavi extends StatelessWidget {
+  const TopNavi({
     Key key,
   }) : super(key: key);
 
