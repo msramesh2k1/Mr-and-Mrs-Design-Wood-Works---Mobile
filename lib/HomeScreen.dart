@@ -81,11 +81,46 @@ class _HomeScreenState extends State<HomeScreen> {
             CategoryPoster(pixels: pixels, context: context),
             Box(height: 40, width: 0),
             CustomizedPoster(context: context),
-            Box(height: 40, width: 0)
+            Box(height: 40, width: 0),
+            NewArrival(),
           ],
         ),
       ),
       color: Colors.white,
+    );
+  }
+}
+
+class NewArrival extends StatelessWidget {
+  const NewArrival({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Box(height: 0, width: 20),
+        Text(
+          "New Arrivals",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.josefinSans(
+            textStyle: TextStyle(
+                fontWeight: FontWeight.w800,
+                color: Colors.black,
+                fontSize: 24,
+                letterSpacing: 0.5),
+          ),
+        ),
+        Box(height: 0, width: 20),
+        Expanded(
+          child: Container(
+            height: 5,
+            width: 20,
+            color: Colors.black,
+          ),
+        )
+      ],
     );
   }
 }
