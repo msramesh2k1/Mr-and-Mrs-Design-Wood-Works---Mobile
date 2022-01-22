@@ -372,7 +372,9 @@ class _MainScreenState extends State<MainScreen> {
                       color: kBackgroundColor,
                       fontSize: 13,
                       letterSpacing: 0),
+                      
                 )),
+
           ),
           height: 35,
           width: 85,

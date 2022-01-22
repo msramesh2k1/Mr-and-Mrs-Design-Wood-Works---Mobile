@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Box(height: 40, width: 0),
             CategoryPoster(pixels: pixels, context: context),
             Box(height: 40, width: 0),
+            CustomizedPoster(context: context),
+            Box(height: 40, width: 0)
           ],
         ),
       ),
@@ -104,66 +107,62 @@ class CategoryPoster extends StatelessWidget {
       children: [
         AnimatedAlign(
           duration: Duration(seconds: 1),
-          alignment: pixels > 15 ? Alignment(0, 0) : Alignment(3, 0),
+          alignment: pixels > 25 ? Alignment(0, 0) : Alignment(3, 0),
           child: Container(
             child: StreamBuilder(
-                stream:
-                    FirebaseFirestore.instance.collection("Items").snapshots(),
+                stream: FirebaseFirestore.instance
+                    .collection("category")
+                    .snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return Center(
                         child: Lottie.network(
                             "https://assets1.lottiefiles.com/packages/lf20_vIuhQq.json"));
                   } else {
-                    return ListView.separated(
-                        separatorBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              height: 4,
-                              color: Colors.black,
-                              width: 0.5,
-                            ),
-                          );
-                        },
+                    return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        // gridDelegate:
-                        //     SliverGridDelegateWithFixedCrossAxisCount(
-                        //         crossAxisCount: 1),
-                        // controller: _scrollController,
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10.0, top: 10, bottom: 10),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => categorypage(
-                                              queryDocumentSnapshot:
-                                                  snapshot.data.docs[index],
-                                            )));
-                              },
+                          return GestureDetector(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 50),
                               child: Container(
+                                height: 100,
+                                width: 200,
                                 decoration: BoxDecoration(
-                                    //   color: Colors.teal[50].withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(5)),
-                                height: 120,
-                                width: 80,
-                                child: Container(
-                                  height: 55,
-                                  //  width: 270,
-                                  child: Center(
-                                    child: Text(
-                                      snapshot.data.docs[index]['name'],
-                                      style: GoogleFonts.josefinSans(
-                                        textStyle: TextStyle(
-                                            fontWeight: FontWeight.w800,
-                                            color: Colors.black,
-                                            fontSize: 14,
-                                            letterSpacing: 1),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            snapshot.data.docs[index]['url']),
+                                        fit: BoxFit.cover,
+                                        colorFilter: ColorFilter.mode(
+                                            Colors.brown.withOpacity(0.3),
+                                            BlendMode.srcATop))),
+                                child: ClipRRect(
+                                  child: BackdropFilter(
+                                    filter:
+                                        ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                                    child: Center(
+                                      child: Container(
+                                        height: 50,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.white)),
+                                        child: Center(
+                                          child: Text(
+                                            snapshot.data.docs[index]['name'],
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.josefinSans(
+                                              textStyle: TextStyle(
+                                                  fontWeight: FontWeight.w800,
+                                                  color: Colors.white,
+                                                  fontSize: 24,
+                                                  letterSpacing: 1),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -180,7 +179,7 @@ class CategoryPoster extends StatelessWidget {
                 image: DecorationImage(
                     image: AssetImage("assets/videos/poster2.png"),
                     fit: BoxFit.cover),
-                border: Border.all(color: Colors.transparent, width: 1)),
+                border: Border.all(color: Colors.white, width: 1)),
           ),
         ),
       ],
@@ -225,6 +224,61 @@ class Poster extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage(
                   "assets/videos/poster1.jpg",
+                ),
+                fit: BoxFit.cover,
+                colorFilter:
+                    ColorFilter.mode(Colors.black12, BlendMode.darken)),
+            border: Border.all(color: Colors.transparent)),
+        width: MediaQuery.of(context).size.width - 40,
+      ),
+    );
+  }
+}
+
+class CustomizedPoster extends StatelessWidget {
+  const CustomizedPoster({
+    Key key,
+    @required this.context,
+  }) : super(key: key);
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 200,
+        child: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+            child: Center(
+              child: Container(
+                child: Center(
+                  child: Text(
+                    "ORDER \nCUSTOMIZED \nFURNITURES",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lato(
+                      height: 1.5,
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 20,
+                          letterSpacing: 2),
+                    ),
+                  ),
+                ),
+                height: 130,
+                width: 300,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 2)),
+              ),
+            ),
+          ),
+        ),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/videos/poster4.png",
                 ),
                 fit: BoxFit.cover,
                 colorFilter:
