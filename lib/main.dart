@@ -11,8 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark));
+      statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations(
@@ -31,11 +30,8 @@ class MyApp extends StatelessWidget {
         //ChangeNotifierProvider.value(value: AddressChanger())
       ],
       child: MaterialApp(
-        
-        
-        theme: Theme.of(context).copyWith(          
-        
-          textTheme: GoogleFonts.josefinSansTextTheme(),
+        theme: Theme.of(context).copyWith(
+            textTheme: GoogleFonts.openSansTextTheme(),
             highlightColor: Colors.red,
             primaryColor: Colors.black,
             accentColor: Colors.black,
@@ -43,7 +39,7 @@ class MyApp extends StatelessWidget {
             // appBarTheme: Theme.of(context)
             //     .appBarTheme
             //     .copyWith(brightness: Brightness.dark)
-                ),
+            ),
         debugShowCheckedModeBanner: false,
         title: 'MR AND MRS',
         home: SplashScreen(),

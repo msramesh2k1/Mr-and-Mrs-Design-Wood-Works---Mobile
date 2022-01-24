@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration(seconds: 3),
         () => MRANDMRS.sharedprefs.getString("uid") == null
             ? Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (c) => MainScreen()))
+                context, MaterialPageRoute(builder: (c) => HomeScreen()))
             : Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (c) => HomeScreen())));
     super.initState();
