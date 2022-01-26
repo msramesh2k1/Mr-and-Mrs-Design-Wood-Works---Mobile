@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mr_and_mrs/Address.dart';
 import 'package:mr_and_mrs/Helper.dart';
 import 'package:mr_and_mrs/MainScreen.dart';
 import 'package:mr_and_mrs/Orders.dart';
 import 'package:mr_and_mrs/constants.dart';
-import 'package:mr_and_mrs/wishlist.dart';
 
 import 'Admin.dart';
 import 'CartPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -130,12 +127,12 @@ class _UserScreenState extends State<UserScreen> {
         ),
         leadingWidth: 25,
         title: Text(
-          "User Settings",
+          "Account Details",
           style: GoogleFonts.josefinSans(
             textStyle: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: kBackgroundColor,
-                fontSize: 18,
+                fontSize: 19,
                 letterSpacing: 1),
           ),
         ),
@@ -172,7 +169,7 @@ class _UserScreenState extends State<UserScreen> {
                                   FirebaseAuth.instance.currentUser.email,
                               style: GoogleFonts.josefinSans(
                                 textStyle: TextStyle(
-                                    fontWeight: FontWeight.w700,
+                                    fontWeight: FontWeight.w600,
                                     color: Colors.black,
                                     fontSize: 20,
                                     letterSpacing: 0),
@@ -186,37 +183,11 @@ class _UserScreenState extends State<UserScreen> {
                 ),
               ),
             ),
-
-            // SizedBox(
-            //   height: 15,
-            // ),
-            // Divider(color: Colors.black),
-            // SizedBox(
-            //   height: 15,
-            // ),
-            // Row(
-            //   children: [
-            //     SizedBox(
-            //       width: 12,
-            //     ),
-            //     Text(
-            //       "ACCOUNT SETTINGS : ",
-            //       style: GoogleFonts.lato(
-            //         textStyle: TextStyle(
-            //             fontWeight: FontWeight.w800,
-            //             color: Colors.black,
-            //             fontSize: 13,
-            //             letterSpacing: 1),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.teal[50].withOpacity(0.3),
+                    color: Colors.brown[50].withOpacity(0.3),
                     borderRadius: BorderRadius.circular(5)),
                 child: Column(
                   children: [
@@ -235,12 +206,12 @@ class _UserScreenState extends State<UserScreen> {
                             Navigator.push(context, route);
                           },
                           child: Text(
-                            "My Orders",
+                            "Orders",
                             style: GoogleFonts.josefinSans(
                               textStyle: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 17,
                                   letterSpacing: 0),
                             ),
                           ),
@@ -271,7 +242,7 @@ class _UserScreenState extends State<UserScreen> {
                               textStyle: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 17,
                                   letterSpacing: 0),
                             ),
                           ),
@@ -297,12 +268,12 @@ class _UserScreenState extends State<UserScreen> {
                             Navigator.push(context, route);
                           },
                           child: Text(
-                            "My Cart",
+                            "Cart",
                             style: GoogleFonts.josefinSans(
                               textStyle: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 17,
                                   letterSpacing: 0),
                             ),
                           ),
@@ -333,7 +304,7 @@ class _UserScreenState extends State<UserScreen> {
                               textStyle: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 17,
                                   letterSpacing: 0),
                             ),
                           ),
@@ -366,7 +337,7 @@ class _UserScreenState extends State<UserScreen> {
                               textStyle: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 17,
                                   letterSpacing: 0),
                             ),
                           ),
