@@ -9,6 +9,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'controllers/login_controller.dart';
+import 'models/user_model.dart';
+
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.white, statusBarIconBrightness: Brightness.dark));
@@ -26,8 +29,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => LoginController()),
         ChangeNotifierProvider.value(value: cartvalue()),
-        //ChangeNotifierProvider.value(value: AddressChanger())
+        StreamProvider<UserModel>.value(
+          value: LoginController().user,
+          initialData: null,
+        ),
       ],
       child: MaterialApp(
         theme: Theme.of(context).copyWith(
