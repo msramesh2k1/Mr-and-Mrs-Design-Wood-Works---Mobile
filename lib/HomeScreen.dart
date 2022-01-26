@@ -20,7 +20,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   VideoPlayerController videoPlayerController;
   ScrollController _scrollController;
+  PageController pageController = PageController();
   double pixels = 0;
+  bool via = true;
   @override
   void initState() {
     super.initState();
@@ -70,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Logo(),
-              TopNavi(),
+              // TopNavi(),
               Box(height: 20, width: 0),
               // VideoBox(
               //     context: context, videoPlayerController: videoPlayerController),
@@ -130,7 +132,291 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Logo(),
-            TopNavi(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.search_sharp),
+                SizedBox(
+                  width: 20,
+                ),
+                GestureDetector(
+                    onTap: () {
+                      // MRANDMRS.sharedprefs.getString("uid") == null
+                      //     ?
+                      // );
+
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(25.0)),
+                        ),
+                        builder: (context) {
+                          return Padding(
+                              padding: MediaQuery.of(context).viewInsets,
+                              child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.8,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, right: 20),
+                                    child: PageView(
+                                        controller: pageController,
+                                        children: [
+                                          Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                SmallLogo(),
+                                                Box(height: 10, width: 0),
+                                                Text(
+                                                  "Create an Account",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.openSans(
+                                                    textStyle: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black,
+                                                        fontSize: 20,
+                                                        letterSpacing: 0),
+                                                  ),
+                                                ),
+                                                TextField(
+                                                  decoration: InputDecoration(
+                                                      hintText: "Full Name"),
+                                                ),
+                                                TextField(
+                                                  decoration: InputDecoration(
+                                                      hintText: "Email"),
+                                                ),
+                                                TextField(
+                                                  decoration: InputDecoration(
+                                                      hintText: "Password"),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Container(
+                                                  height: 50,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Register",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          GoogleFonts.openSans(
+                                                        textStyle: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.white,
+                                                            fontSize: 18,
+                                                            letterSpacing: 0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  color: Colors.black,
+                                                ),
+                                                Box(height: 10, width: 0),
+                                                Column(children: [
+                                                  Text(
+                                                    "By signing up you are agreeing to our",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.openSans(
+                                                      textStyle: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.black,
+                                                          fontSize: 15,
+                                                          letterSpacing: 0),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "Terms and Conditions",
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.openSans(
+                                                      textStyle: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Colors.black,
+                                                          fontSize: 15,
+                                                          letterSpacing: 0),
+                                                    ),
+                                                  ),
+                                                  Box(height: 10, width: 0),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      pageController
+                                                          .jumpToPage(1);
+                                                    },
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          "Have an Account ?",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: GoogleFonts
+                                                              .nunito(
+                                                            textStyle: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15,
+                                                                letterSpacing:
+                                                                    0),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          " Login",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: GoogleFonts
+                                                              .nunito(
+                                                            textStyle: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                color: Colors
+                                                                    .blue[700],
+                                                                fontSize: 15,
+                                                                letterSpacing:
+                                                                    0),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ])
+                                              ]),
+                                          Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                SmallLogo(),
+                                                Box(height: 10, width: 0),
+                                                Text(
+                                                  "Sign In",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.openSans(
+                                                    textStyle: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black,
+                                                        fontSize: 20,
+                                                        letterSpacing: 0),
+                                                  ),
+                                                ),
+                                                TextField(
+                                                  decoration: InputDecoration(
+                                                      hintText: "Email"),
+                                                ),
+                                                TextField(
+                                                  decoration: InputDecoration(
+                                                      hintText: "Password"),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Container(
+                                                  height: 50,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Login",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          GoogleFonts.openSans(
+                                                        textStyle: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.white,
+                                                            fontSize: 18,
+                                                            letterSpacing: 0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  color: Colors.black,
+                                                ),
+                                                Box(height: 10, width: 0),
+                                                Column(children: [
+                                                  Box(height: 10, width: 0),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      pageController
+                                                          .jumpToPage(0);
+                                                    },
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          "Don't have an Account",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: GoogleFonts
+                                                              .nunito(
+                                                            textStyle: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15,
+                                                                letterSpacing:
+                                                                    0),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "Register",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: GoogleFonts
+                                                              .nunito(
+                                                            textStyle: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                color: Colors
+                                                                    .blue[700],
+                                                                fontSize: 15,
+                                                                letterSpacing:
+                                                                    0),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ])
+                                              ]),
+                                        ]),
+                                  )));
+                        },
+                      );
+                      // : Navigator.push(
+                      //     context, MaterialPageRoute(builder: (_) => userScren()));
+                    },
+                    child: Icon(Icons.account_circle_outlined)),
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(Icons.shopping_cart_outlined),
+                SizedBox(
+                  width: 20,
+                )
+              ],
+            ),
             Box(height: 20, width: 0),
             VideoBox(
                 context: context, videoPlayerController: videoPlayerController),
@@ -895,7 +1181,7 @@ class VideoBox extends StatelessWidget {
             child: Text(
               "Reimagine your place \nwith Modern Furnitures",
               textAlign: TextAlign.center,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.aBeeZee(
                 textStyle: TextStyle(
                     fontWeight: FontWeight.normal,
                     color: Colors.white,
@@ -927,211 +1213,6 @@ class VideoBox extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class TopNavi extends StatelessWidget {
-  const TopNavi({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Icon(Icons.search_sharp),
-        SizedBox(
-          width: 20,
-        ),
-        GestureDetector(
-            onTap: () {
-              // MRANDMRS.sharedprefs.getString("uid") == null
-              //     ?
-              // showModalBottomSheet(
-              //   isScrollControlled: true,
-              //   context: context,
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius:
-              //         BorderRadius.vertical(top: Radius.circular(25.0)),
-              //   ),
-              //   builder: (_) => Padding(
-              //     padding: MediaQuery.of(context).viewInsets,
-              //     child: Container(
-              //       height: MediaQuery.of(context).size.height / 2,
-              //       child: Column(
-              //         // mainAxisSize: MainAxisSize.min,
-              //         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: [
-              //           SmallLogo(),
-              //           Box(height: 10, width: 0),
-              //           Text(
-              //             "Create an Account",
-              //             textAlign: TextAlign.center,
-              //             style: GoogleFonts.openSans(
-              //               textStyle: TextStyle(
-              //                   fontWeight: FontWeight.bold,
-              //                   color: Colors.black,
-              //                   fontSize: 20,
-              //                   letterSpacing: 0),
-              //             ),
-              //           ),
-              //           TextField(
-              //             decoration: InputDecoration(hintText: "Full Name"),
-              //           ),
-              //           TextField(
-              //             decoration: InputDecoration(hintText: "Email"),
-              //           ),
-              //           TextField(
-              //             decoration: InputDecoration(hintText: "Password"),
-              //           ),
-              //
-              //                 ],
-              //               ),
-              //             ],
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // );
-
-              showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(25.0)),
-                ),
-                builder: (context) {
-                  return Padding(
-                      padding: MediaQuery.of(context).viewInsets,
-                      child: Container(
-                          height: MediaQuery.of(context).size.height / 1.8,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 20.0, right: 20),
-                            child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SmallLogo(),
-                                  Box(height: 10, width: 0),
-                                  Text(
-                                    "Create an Account",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.openSans(
-                                      textStyle: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          letterSpacing: 0),
-                                    ),
-                                  ),
-                                  TextField(
-                                    decoration:
-                                        InputDecoration(hintText: "Full Name"),
-                                  ),
-                                  TextField(
-                                    decoration:
-                                        InputDecoration(hintText: "Email"),
-                                  ),
-                                  TextField(
-                                    decoration:
-                                        InputDecoration(hintText: "Password"),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Container(
-                                    height: 50,
-                                    child: Center(
-                                      child: Text(
-                                        "Register",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.openSans(
-                                          textStyle: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                              letterSpacing: 0),
-                                        ),
-                                      ),
-                                    ),
-                                    width: MediaQuery.of(context).size.width,
-                                    color: Colors.black,
-                                  ),
-                                  Box(height: 10, width: 0),
-                                  Column(children: [
-                                    Text(
-                                      "By signing up you are agreeing to our",
-                                      textAlign: TextAlign.left,
-                                      style: GoogleFonts.openSans(
-                                        textStyle: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black,
-                                            fontSize: 15,
-                                            letterSpacing: 0),
-                                      ),
-                                    ),
-                                    Text(
-                                      "Terms and Conditions",
-                                      textAlign: TextAlign.left,
-                                      style: GoogleFonts.openSans(
-                                        textStyle: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                            fontSize: 15,
-                                            letterSpacing: 0),
-                                      ),
-                                    ),
-                                    Box(height: 10, width: 0),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Have an Account ?",
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.nunito(
-                                            textStyle: TextStyle(
-                                                fontWeight: FontWeight.normal,
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                letterSpacing: 0),
-                                          ),
-                                        ),
-                                        Text(
-                                          " Login",
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.nunito(
-                                            textStyle: TextStyle(
-                                                fontWeight: FontWeight.normal,
-                                                color: Colors.blue[700],
-                                                fontSize: 15,
-                                                letterSpacing: 0),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ])
-                                ]),
-                          )));
-                },
-              );
-              // : Navigator.push(
-              //     context, MaterialPageRoute(builder: (_) => userScren()));
-            },
-            child: Icon(Icons.account_circle_outlined)),
-        SizedBox(
-          width: 20,
-        ),
-        Icon(Icons.shopping_cart_outlined),
-        SizedBox(
-          width: 20,
-        )
-      ],
     );
   }
 }
