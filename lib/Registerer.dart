@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mr_and_mrs/ErrorAlert.dart';
 import 'package:mr_and_mrs/Helper.dart';
 import 'package:mr_and_mrs/HomScreen.dart';
+import 'package:mr_and_mrs/HomeScreen.dart';
 import 'package:mr_and_mrs/Register.dart';
 import 'package:mr_and_mrs/SplashScreen.dart';
 import 'package:mr_and_mrs/constants.dart';
@@ -602,7 +603,7 @@ Widget largescreen(){
     if (firebaseUser != null) {
       readData(firebaseUser).then((s) {
         Navigator.pop(context);
-        Route route = MaterialPageRoute(builder: (context) => HomeScreen());
+        Route route = MaterialPageRoute(builder: (context) =>HomeScreen());
         Navigator.pushReplacement(context, route);
       });
     }

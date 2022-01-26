@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mr_and_mrs/Helper.dart';
 import 'package:mr_and_mrs/HomScreen.dart';
+import 'package:mr_and_mrs/HomeScreen.dart';
 import 'package:mr_and_mrs/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';

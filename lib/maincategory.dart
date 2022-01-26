@@ -74,7 +74,7 @@ class _shopbycategoryState extends State<shopbycategory> {
                           onTap: () {
                             Navigator.of(context).push(new MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return userScren();
+                              return UserScreen();
                             }));
                           },
                           child: Icon(Icons.account_circle_outlined,
@@ -97,7 +97,7 @@ class _shopbycategoryState extends State<shopbycategory> {
                           onTap: () {
                             Navigator.of(context).push(new MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return userScren();
+                              return UserScreen();
                             }));
                           },
                           child: Icon(Icons.favorite_outline_rounded,

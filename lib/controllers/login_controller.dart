@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mr_and_mrs/Helper.dart';
 import 'package:mr_and_mrs/models/user_model.dart';
 
 class LoginController extends ChangeNotifier {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  
 
   UserModel setusermodel(User user) {
     if (user != null) {
@@ -31,7 +30,6 @@ class LoginController extends ChangeNotifier {
     });
   }
 
-
   Stream<UserModel> get user {
     return _auth.authStateChanges().map((User user) => setusermodel(user));
   }
@@ -41,6 +39,7 @@ class LoginController extends ChangeNotifier {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email.toString(), password: password.toString());
       User user = result.user;
+      MRANDMRS.sharedprefs.setString("uid", user.uid);
       return setusermodel(user);
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -53,6 +52,7 @@ class LoginController extends ChangeNotifier {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email.toString(), password: password.toString());
       User user = result.user;
+      MRANDMRS.sharedprefs.setString("uid", user.uid);
       print(user);
 
       setusermodel(user);
@@ -64,7 +64,6 @@ class LoginController extends ChangeNotifier {
     }
   }
 
-  
   Future signout() async {
     try {
       await _auth.signOut();

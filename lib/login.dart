@@ -13,6 +13,8 @@ import 'package:mr_and_mrs/SplashScreen.dart';
 import 'package:mr_and_mrs/constants.dart';
 import 'package:mr_and_mrs/forgotpassword.dart';
 
+import 'HomeScreen.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => new _LoginState();
