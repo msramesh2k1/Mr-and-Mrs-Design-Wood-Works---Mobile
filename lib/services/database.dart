@@ -3,7 +3,7 @@ import 'package:mr_and_mrs/models/category_model.dart';
 
 class DBService {
   Stream<List<CategoryModel>> getCategoryList() {
-    return FirebaseFirestore.instance.collection('category').snapshots().map(
+    return FirebaseFirestore.instance.collection('rooms').snapshots().map(
         (snapShot) => snapShot.docs
             .map((document) => CategoryModel.fromJson(document.data()))
             .toList());
