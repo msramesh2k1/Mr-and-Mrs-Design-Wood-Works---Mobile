@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mr_and_mrs/Helper.dart';
 import 'package:mr_and_mrs/Widgets/Custom_Widgets.dart';
 import 'package:mr_and_mrs/Widgets/Responsive_widget.dart';
+import 'package:mr_and_mrs/categorypage.dart';
 import 'package:mr_and_mrs/services/database.dart';
 import 'package:mr_and_mrs/userScreen.dart';
 import 'package:provider/provider.dart';
@@ -88,7 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
               // TopNavi(),
               Box(height: 20, width: 0),
               VideoBox(
-                  context: context, videoPlayerController: videoPlayerController),
+                  context: context,
+                  videoPlayerController: videoPlayerController),
               Box(height: 40, width: 0),
               Poster(context: context),
               Box(height: 40, width: 0),
@@ -1064,38 +1066,44 @@ class Poster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        height: 200,
-        child: Center(
-          child: Container(
-            child: Center(
-              child: Text(
-                "EXPLORE   BY   ROOMS",
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 20,
-                      letterSpacing: 0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => CategoryPage()));
+        },
+        child: Container(
+          height: 200,
+          child: Center(
+            child: Container(
+              child: Center(
+                child: Text(
+                  "EXPLORE   BY   ROOMS",
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+                        letterSpacing: 0),
+                  ),
                 ),
               ),
+              height: 60,
+              width: 300,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 2)),
             ),
-            height: 60,
-            width: 300,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 2)),
           ),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                    "assets/videos/poster1.jpg",
+                  ),
+                  fit: BoxFit.cover,
+                  colorFilter:
+                      ColorFilter.mode(Colors.black12, BlendMode.darken)),
+              border: Border.all(color: Colors.transparent)),
+          width: MediaQuery.of(context).size.width - 40,
         ),
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  "assets/videos/poster1.jpg",
-                ),
-                fit: BoxFit.cover,
-                colorFilter:
-                    ColorFilter.mode(Colors.black12, BlendMode.darken)),
-            border: Border.all(color: Colors.transparent)),
-        width: MediaQuery.of(context).size.width - 40,
       ),
     );
   }
@@ -1361,7 +1369,7 @@ class VideoBox extends StatelessWidget {
   }) : super(key: key);
 
   final BuildContext context;
-   final VideoPlayerController videoPlayerController;
+  final VideoPlayerController videoPlayerController;
 
   @override
   Widget build(BuildContext context) {

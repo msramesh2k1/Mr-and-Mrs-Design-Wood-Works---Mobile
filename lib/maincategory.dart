@@ -196,9 +196,8 @@ class _shopbycategoryState extends State<shopbycategory> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => categorypage(
-                                                  queryDocumentSnapshot:
-                                                      snapshot.data.docs[index],
+                                            builder: (context) => CategoryPage(
+                                                 
                                                 )));
                                   },
                                   child: Container(
