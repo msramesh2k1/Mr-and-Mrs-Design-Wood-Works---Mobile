@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_and_mrs/DetailedScreen.dart';
 import 'package:mr_and_mrs/Helper.dart';
+import 'package:mr_and_mrs/ProductPage.dart';
 import 'package:mr_and_mrs/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +52,10 @@ class _CategoryPageState extends State<CategoryPage> {
               itemCount: categoryList.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => ProductPage()));
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
