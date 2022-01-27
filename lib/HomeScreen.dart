@@ -7,11 +7,13 @@ import 'package:lottie/lottie.dart';
 import 'package:mr_and_mrs/Helper.dart';
 import 'package:mr_and_mrs/Widgets/Custom_Widgets.dart';
 import 'package:mr_and_mrs/Widgets/Responsive_widget.dart';
+import 'package:mr_and_mrs/services/database.dart';
 import 'package:mr_and_mrs/userScreen.dart';
 import 'package:provider/provider.dart';
 // import 'package:video_player/video_player.dart';
 import 'constants.dart';
 import 'controllers/login_controller.dart';
+import 'models/category_model.dart';
 import 'models/user_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -546,6 +548,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Poster(context: context),
             Box(height: 40, width: 0),
             CategoryPoster(pixels: pixels, context: context),
+            CategoryPoster(pixels: pixels, context: context),
             Box(height: 40, width: 0),
             CustomizedPoster(context: context),
             Box(height: 40, width: 0),
@@ -770,6 +773,9 @@ class CategoryPoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<CategoryModel> categoryList =
+        Provider.of<List<CategoryModel>>(context);
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -777,69 +783,143 @@ class CategoryPoster extends StatelessWidget {
           duration: Duration(seconds: 1),
           alignment: pixels > 25 ? Alignment(0, 0) : Alignment(3, 0),
           child: Container(
-            child: StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection("category")
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                        child: Lottie.network(
-                            "https://assets1.lottiefiles.com/packages/lf20_vIuhQq.json"));
-                  } else {
-                    return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: snapshot.data.docs.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return GestureDetector(
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 50),
-                              child: Container(
-                                height: 100,
-                                width: 200,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            snapshot.data.docs[index]['url']),
-                                        fit: BoxFit.cover,
-                                        colorFilter: ColorFilter.mode(
-                                            Colors.brown.withOpacity(0.3),
-                                            BlendMode.srcATop))),
-                                child: ClipRRect(
-                                  child: BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                                    child: Center(
-                                      child: Container(
-                                        height: 50,
-                                        width: 150,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.white)),
-                                        child: Center(
-                                          child: Text(
-                                            snapshot.data.docs[index]['name'],
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.josefinSans(
-                                              textStyle: TextStyle(
-                                                  fontWeight: FontWeight.w800,
-                                                  color: Colors.white,
-                                                  fontSize: 24,
-                                                  letterSpacing: 1),
-                                            ),
-                                          ),
-                                        ),
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: categoryList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if (categoryList[index].category == "wood") {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 50),
+                        child: Container(
+                          height: 100,
+                          width: 200,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(categoryList[index].url),
+                                  fit: BoxFit.cover,
+                                  colorFilter: ColorFilter.mode(
+                                      Colors.brown.withOpacity(0.3),
+                                      BlendMode.srcATop))),
+                          child: ClipRRect(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                              child: Center(
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white)),
+                                  child: Center(
+                                    child: Text(
+                                      categoryList[index].title,
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.josefinSans(
+                                        textStyle: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                            letterSpacing: 1),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          );
-                        });
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return SizedBox();
                   }
+                }),
+            height: 300,
+            width: MediaQuery.of(context).size.width - 40,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/videos/poster2.png"),
+                    fit: BoxFit.cover),
+                border: Border.all(color: Colors.white, width: 1)),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CategoryPoster2 extends StatelessWidget {
+  const CategoryPoster2({
+    Key key,
+    @required this.pixels,
+    @required this.context,
+  }) : super(key: key);
+
+  final double pixels;
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    List<CategoryModel> categoryList =
+        Provider.of<List<CategoryModel>>(context);
+
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        AnimatedAlign(
+          duration: Duration(seconds: 1),
+          alignment: pixels > 25 ? Alignment(0, 0) : Alignment(3, 0),
+          child: Container(
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: categoryList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 50),
+                      child: Container(
+                        height: 100,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(categoryList[index].url),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.brown.withOpacity(0.3),
+                                    BlendMode.srcATop))),
+                        child: ClipRRect(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                            child: Center(
+                              child: Container(
+                                height: 50,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white)),
+                                child: Center(
+                                  child: Text(
+                                    categoryList[index].title,
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.josefinSans(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          color: Colors.white,
+                                          fontSize: 24,
+                                          letterSpacing: 1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
                 }),
             height: 300,
             width: MediaQuery.of(context).size.width - 40,
