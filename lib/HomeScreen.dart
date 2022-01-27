@@ -790,42 +790,40 @@ class CategoryPoster extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: categoryList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  if (categoryList[index].category == "wood") {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 50),
-                        child: Container(
-                          height: 100,
-                          width: 200,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(categoryList[index].url),
-                                  fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(
-                                      Colors.brown.withOpacity(0.3),
-                                      BlendMode.srcATop))),
-                          child: ClipRRect(
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                              child: Center(
-                                child: Container(
-                                  height: 50,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.white)),
-                                  child: Center(
-                                    child: Text(
-                                      categoryList[index].title,
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.josefinSans(
-                                        textStyle: TextStyle(
-                                            fontWeight: FontWeight.w800,
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                            letterSpacing: 1),
-                                      ),
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 50),
+                      child: Container(
+                        height: 100,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(categoryList[index].url),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.brown.withOpacity(0.3),
+                                    BlendMode.srcATop))),
+                        child: ClipRRect(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                            child: Center(
+                              child: Container(
+                                height: 50,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white)),
+                                child: Center(
+                                  child: Text(
+                                    categoryList[index].title,
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.josefinSans(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          color: Colors.white,
+                                          fontSize: 24,
+                                          letterSpacing: 1),
                                     ),
                                   ),
                                 ),
@@ -834,10 +832,8 @@ class CategoryPoster extends StatelessWidget {
                           ),
                         ),
                       ),
-                    );
-                  } else {
-                    return SizedBox();
-                  }
+                    ),
+                  );
                 }),
             height: 300,
             width: MediaQuery.of(context).size.width - 40,
