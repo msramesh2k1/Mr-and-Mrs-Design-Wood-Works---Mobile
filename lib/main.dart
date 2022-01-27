@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'controllers/login_controller.dart';
+import 'models/product_model.dart';
 import 'models/user_model.dart';
 
 Future<void> main() async {
@@ -39,6 +40,10 @@ class MyApp extends StatelessWidget {
         ),
         StreamProvider<List<CategoryModel>>.value(
           value: DBService().getCategoryList(),
+          initialData: null,
+        ),
+        StreamProvider<List<ProductModel>>.value(
+          value: DBService().getProductList(),
           initialData: null,
         ),
       ],
