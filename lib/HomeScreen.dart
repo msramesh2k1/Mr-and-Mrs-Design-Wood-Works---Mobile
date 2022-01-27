@@ -10,6 +10,7 @@ import 'package:mr_and_mrs/Widgets/Responsive_widget.dart';
 import 'package:mr_and_mrs/services/database.dart';
 import 'package:mr_and_mrs/userScreen.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 // import 'package:video_player/video_player.dart';
 import 'constants.dart';
 import 'controllers/login_controller.dart';
@@ -24,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // VideoPlayerController videoPlayerController;
+  VideoPlayerController videoPlayerController;
   String registeremail = '';
   String password = '';
   String loginemail = '';
@@ -45,13 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
         print("Rames" + pixels.toString());
       });
     });
-    // videoPlayerController = VideoPlayerController.asset("assets/videos/bg1.mp4")
-    //   ..initialize().then((_) {
-    //     videoPlayerController.play();
-    //     videoPlayerController.setLooping(true);
-    //     videoPlayerController.setVolume(0);
-    //     setState(() {});
-    //   });
+    videoPlayerController = VideoPlayerController.asset("assets/videos/bg1.mp4")
+      ..initialize().then((_) {
+        videoPlayerController.play();
+        videoPlayerController.setLooping(true);
+        videoPlayerController.setVolume(0);
+        setState(() {});
+      });
   }
 
   @override
@@ -86,9 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Logo(),
               // TopNavi(),
               Box(height: 20, width: 0),
-              // VideoBox(
-              //     context: context, videoPlayerController: videoPlayerController),
-              // Box(height: 40, width: 0),
+              VideoBox(
+                  context: context, videoPlayerController: videoPlayerController),
+              Box(height: 40, width: 0),
               Poster(context: context),
               Box(height: 40, width: 0),
               CategoryPoster(pixels: pixels, context: context),
@@ -542,8 +543,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Box(height: 20, width: 0),
-            // VideoBox(
-            //     context: context, videoPlayerController: videoPlayerController),
+            VideoBox(
+                context: context, videoPlayerController: videoPlayerController),
             Box(height: 40, width: 0),
             Poster(context: context),
             Box(height: 40, width: 0),
@@ -1352,72 +1353,72 @@ class CustomizedPoster2 extends StatelessWidget {
   }
 }
 
-// class VideoBox extends StatelessWidget {
-//   const VideoBox({
-//     Key key,
-//     @required this.context,
-//     @required this.videoPlayerController,
-//   }) : super(key: key);
+class VideoBox extends StatelessWidget {
+  const VideoBox({
+    Key key,
+    @required this.context,
+    @required this.videoPlayerController,
+  }) : super(key: key);
 
-//   final BuildContext context;
-//   // final VideoPlayerController videoPlayerController;
+  final BuildContext context;
+   final VideoPlayerController videoPlayerController;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Stack(
-//         alignment: Alignment.center,
-//         children: [
-//           Container(
-//             height: 500,
-//             width: MediaQuery.of(context).size.width - 40,
-//             child: videoPlayerController.value.isInitialized
-//                 ? AspectRatio(
-//                     aspectRatio: videoPlayerController.value.aspectRatio,
-//                     child: VideoPlayer(videoPlayerController),
-//                   )
-//                 : Container(),
-//           ),
-//           Positioned(
-//             bottom: 130,
-//             child: Text(
-//               "Reimagine your place \nwith Modern Furnitures",
-//               textAlign: TextAlign.center,
-//               style: GoogleFonts.aBeeZee(
-//                 textStyle: TextStyle(
-//                     fontWeight: FontWeight.normal,
-//                     color: Colors.white,
-//                     fontSize: 19,
-//                     letterSpacing: 1),
-//               ),
-//             ),
-//           ),
-//           Positioned(
-//             bottom: 60,
-//             child: Container(
-//               child: Center(
-//                 child: Text(
-//                   "EXPLORE",
-//                   style: GoogleFonts.openSans(
-//                     textStyle: TextStyle(
-//                         fontWeight: FontWeight.bold,
-//                         color: Colors.white,
-//                         fontSize: 15,
-//                         letterSpacing: 1),
-//                   ),
-//                 ),
-//               ),
-//               height: 40,
-//               width: 130,
-//               decoration: BoxDecoration(
-//                   border: Border.all(color: Colors.white, width: 2)),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            height: 500,
+            width: MediaQuery.of(context).size.width - 40,
+            child: videoPlayerController.value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: videoPlayerController.value.aspectRatio,
+                    child: VideoPlayer(videoPlayerController),
+                  )
+                : Container(),
+          ),
+          Positioned(
+            bottom: 130,
+            child: Text(
+              "Reimagine your place \nwith Modern Furnitures",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.aBeeZee(
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                    fontSize: 19,
+                    letterSpacing: 1),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 60,
+            child: Container(
+              child: Center(
+                child: Text(
+                  "EXPLORE",
+                  style: GoogleFonts.openSans(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 15,
+                        letterSpacing: 1),
+                  ),
+                ),
+              ),
+              height: 40,
+              width: 130,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 2)),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
 
 class Logo extends StatelessWidget {
   const Logo({

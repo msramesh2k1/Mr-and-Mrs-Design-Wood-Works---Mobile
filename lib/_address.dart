@@ -1,6 +1,6 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:mr_and_mrs/Helper.dart';
-// import 'package:mr_and_mrs/paymentpage.dart';
+// import 'package:mr_and_mr/paymentpage.dart';
 // import 'package:mr_and_mrs/razorpay.dart';
 // import 'AddAddress.dart';
 // import 'AddressINfo.dart';
