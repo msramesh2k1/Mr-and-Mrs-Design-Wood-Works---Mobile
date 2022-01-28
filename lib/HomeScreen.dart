@@ -58,6 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void dispose() {
+    if (videoPlayerController.value.isPlaying) videoPlayerController.pause();
+
+    videoPlayerController = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResponsiveWidget(
