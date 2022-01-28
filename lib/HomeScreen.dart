@@ -307,12 +307,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             .read<
                                                                 LoginController>()
                                                             .signUp(
+                                                                name: name,
                                                                 email:
                                                                     registeremail,
                                                                 password:
                                                                     password)
                                                             .whenComplete(() =>
-                                                                Navigator.push(
+                                                                Navigator.pushReplacement(
                                                                     context,
                                                                     MaterialPageRoute(
                                                                         builder:
@@ -537,7 +538,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 password:
                                                                     loginpassword)
                                                             .whenComplete(() =>
-                                                                Navigator.push(
+                                                                Navigator.pushReplacement(
                                                                     context,
                                                                     MaterialPageRoute(
                                                                         builder:

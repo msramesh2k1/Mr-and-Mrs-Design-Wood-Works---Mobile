@@ -3,6 +3,9 @@ import 'package:mr_and_mrs/Helper.dart';
 import 'package:mr_and_mrs/MainScreen.dart';
 import 'package:mr_and_mrs/Orders.dart';
 import 'package:mr_and_mrs/constants.dart';
+import 'package:mr_and_mrs/controllers/login_controller.dart';
+import 'package:mr_and_mrs/models/user_model.dart';
+import 'package:provider/src/provider.dart';
 
 import 'Admin.dart';
 import 'CartPage.dart';
@@ -33,6 +36,8 @@ class _UserScreenState extends State<UserScreen> {
     });
     return cartno;
   }
+
+  UserModel userModel = UserModel();
 
   @override
   Widget build(BuildContext context) {
@@ -165,8 +170,12 @@ class _UserScreenState extends State<UserScreen> {
                               width: 12,
                             ),
                             Text(
-                              "Email :  " +
-                                  FirebaseAuth.instance.currentUser.email,
+                              "Email : " +
+                                  context
+                                      .read<LoginController>()
+                                      .userModel
+                                      .email
+                                      .toString(),
                               style: GoogleFonts.josefinSans(
                                 textStyle: TextStyle(
                                     fontWeight: FontWeight.w600,
