@@ -1025,7 +1025,7 @@ class _ordersState extends State<Orders> {
                                                                             MaterialPageRoute(
                                                                                 builder: (context) =>
                                                                                     DetailScreen(
-                                                                                      queryDocumentSnapshot: snapshot.data.docs[index],
+                                                                                      // queryDocumentSnapshot: snapshot.data.docs[index],
                                                                                     )));
                                                                       },
                                                                       child: Container(

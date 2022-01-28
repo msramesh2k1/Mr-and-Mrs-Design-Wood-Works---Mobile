@@ -63,7 +63,14 @@ class _ProductPageState extends State<ProductPage> {
                       return Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => DetailScreen(
+                                          productlist: productList[index],
+                                        )));
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(

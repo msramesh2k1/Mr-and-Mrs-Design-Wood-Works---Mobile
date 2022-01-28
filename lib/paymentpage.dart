@@ -267,10 +267,10 @@ class _PaymentpageState extends State<PaymentPage> {
                                                         MaterialPageRoute(
                                                             builder: (context) =>
                                                                 DetailScreen(
-                                                                  queryDocumentSnapshot:
-                                                                      snapshot.data
-                                                                              .docs[
-                                                                          index],
+                                                                  // queryDocumentSnapshot:
+                                                                  //     snapshot.data
+                                                                  //             .docs[
+                                                                  //         index],
                                                                 )));
                                                   },
                                                   child: Container(

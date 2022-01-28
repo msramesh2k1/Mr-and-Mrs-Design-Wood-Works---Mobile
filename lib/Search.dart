@@ -163,8 +163,8 @@ class _SearchState extends State<Search> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => DetailScreen(
-                                            queryDocumentSnapshot:
-                                                documentSnapshot,
+                                            // queryDocumentSnapshot:
+                                            //     documentSnapshot,
                                           )));
                             },
                             child: Column(
