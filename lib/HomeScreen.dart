@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     videoPlayerController = VideoPlayerController.asset("assets/videos/bg1.mp4")
       ..initialize().then((_) {
         videoPlayerController.play();
-        videoPlayerController.setLooping(true);
+        // videoPlayerController.setLooping(true);
         videoPlayerController.setVolume(0);
         setState(() {});
       });
@@ -64,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (videoPlayerController.value.isPlaying) videoPlayerController.pause();
 
     videoPlayerController = null;
+    videoPlayerController.dispose();
     super.dispose();
   }
 
