@@ -158,9 +158,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Consumer<LoginController>(builder: (context, value, __) {
                   return GestureDetector(
                       onTap: () {
-                        // value.signIn(
-                        //     email: "msrameshnavee@gmail.com",
-                        //     password: "123456789");
                         if (MRANDMRS.sharedprefs.getString("uid") == null) {
                           showModalBottomSheet(
                             isScrollControlled: true,
@@ -188,7 +185,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           .spaceEvenly,
                                                   children: [
                                                     SmallLogo(),
-                                                    Box(height: 10, width: 0),
                                                     Text(
                                                       "Create an Account",
                                                       textAlign:
@@ -203,43 +199,99 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             letterSpacing: 0),
                                                       ),
                                                     ),
-                                                    TextField(
-                                                      onChanged: (val) {
-                                                        setState(() {
-                                                          name = val;
-                                                        });
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                              hintText:
-                                                                  "Full Name"),
-                                                    ),
-                                                    TextField(
-                                                      onChanged: (val) {
-                                                        setState(() {
+                                                    Container(
+                                                      height: 45,
+                                                      child: TextField(
+                                                        onChanged: (val) {
                                                           setState(() {
-                                                            registeremail = val;
+                                                            name = val;
                                                           });
-                                                        });
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                              hintText:
-                                                                  "Email"),
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                                focusedBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide: const BorderSide(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      width:
+                                                                          1.5),
+                                                                ),
+                                                                border: OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            0)),
+                                                                labelStyle: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                                labelText:
+                                                                    "Full Name"),
+                                                      ),
                                                     ),
-                                                    TextField(
-                                                      onChanged: (val) {
-                                                        setState(() {
-                                                          password = val;
-                                                        });
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                              hintText:
-                                                                  "Password"),
+                                                    Container(
+                                                      height: 45,
+                                                      child: TextField(
+                                                        onChanged: (val) {
+                                                          setState(() {
+                                                            setState(() {
+                                                              registeremail =
+                                                                  val;
+                                                            });
+                                                          });
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                                focusedBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide: const BorderSide(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      width:
+                                                                          1.5),
+                                                                ),
+                                                                border: OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            0)),
+                                                                labelStyle: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                                labelText:
+                                                                    "Email"),
+                                                      ),
                                                     ),
-                                                    SizedBox(
-                                                      height: 20,
+                                                    Container(
+                                                      height: 45,
+                                                      child: TextField(
+                                                        onChanged: (val) {
+                                                          setState(() {
+                                                            password = val;
+                                                          });
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                                focusedBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide: const BorderSide(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      width:
+                                                                          1.5),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              0.0),
+                                                                ),
+                                                                border: OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            0)),
+                                                                labelStyle: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                                labelText:
+                                                                    "Password"),
+                                                      ),
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
@@ -287,7 +339,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         color: Colors.black,
                                                       ),
                                                     ),
-                                                    Box(height: 10, width: 0),
                                                     Column(children: [
                                                       Text(
                                                         "By signing up you are agreeing to our",
@@ -397,27 +448,72 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             letterSpacing: 0),
                                                       ),
                                                     ),
-                                                    TextField(
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          loginemail = value;
-                                                        });
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                              hintText:
-                                                                  "Email"),
+                                                    Container(
+                                                      height: 45,
+                                                      child: TextField(
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            loginemail = value;
+                                                          });
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                                focusedBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide: const BorderSide(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      width:
+                                                                          1.5),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              0.0),
+                                                                ),
+                                                                border: OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            0)),
+                                                                labelStyle: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                                labelText:
+                                                                    "Email"),
+                                                      ),
                                                     ),
-                                                    TextField(
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          loginpassword = value;
-                                                        });
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                              hintText:
-                                                                  "Password"),
+                                                    Container(
+                                                      height: 45,
+                                                      child: TextField(
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            loginpassword =
+                                                                value;
+                                                          });
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                                focusedBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide: const BorderSide(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      width:
+                                                                          1.5),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              0.0),
+                                                                ),
+                                                                border: OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            0)),
+                                                                labelStyle: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                                labelText:
+                                                                    "Password"),
+                                                      ),
                                                     ),
                                                     SizedBox(
                                                       height: 20,
@@ -482,7 +578,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              "Don't have an Account",
+                                                              "Don't have an Account?",
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
@@ -501,7 +597,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              "Register",
+                                                              " Register",
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
