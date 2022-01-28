@@ -1,25 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mr_and_mrs/Address.dart';
 import 'package:mr_and_mrs/CartPage.dart';
-import 'package:mr_and_mrs/OrderDetailspage.dart';
 import 'package:mr_and_mrs/Orders.dart';
+import 'package:mr_and_mrs/controllers/cart_controller.dart';
 import 'package:mr_and_mrs/paymentpage.dart';
+import 'package:provider/src/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:toast/toast.dart';
 
 import 'Helper.dart';
-import 'HomScreen.dart';
-import 'constants.dart';
 
-class stepper extends StatefulWidget {
+class StepperCart extends StatefulWidget {
   @override
-  _stepperState createState() => _stepperState();
+  _StepperCartState createState() => _StepperCartState();
 }
 
-class _stepperState extends State<stepper> {
+class _StepperCartState extends State<StepperCart> {
   var currentStep = 0;
   int totalAmount = 0;
   int quanity = 1;
@@ -126,22 +124,24 @@ class _stepperState extends State<stepper> {
         .collection("cart")
         .get()
         .then((value) => value.docs.forEach((element) {
-       
-                  FirebaseFirestore.instance.collection("orders").doc(MRANDMRS.sharedprefs.getString("uid"))
-                  .collection("items")
-                  .doc(response.paymentId.toString()).set({
-                    "id":response.paymentId.toString(),
-                    "status":"order Placed",
-                    "address":id,
-                    "payment":"PAID"
-
-
-                  });
               FirebaseFirestore.instance
                   .collection("orders")
                   .doc(MRANDMRS.sharedprefs.getString("uid"))
                   .collection("items")
-                  .doc(response.paymentId.toString()).collection("items").doc(element.data()['id'])
+                  .doc(response.paymentId.toString())
+                  .set({
+                "id": response.paymentId.toString(),
+                "status": "order Placed",
+                "address": id,
+                "payment": "PAID"
+              });
+              FirebaseFirestore.instance
+                  .collection("orders")
+                  .doc(MRANDMRS.sharedprefs.getString("uid"))
+                  .collection("items")
+                  .doc(response.paymentId.toString())
+                  .collection("items")
+                  .doc(element.data()['id'])
                   .set({
                 "height": element.data()['height'],
                 'width': element.data()['width'],
@@ -175,11 +175,11 @@ class _stepperState extends State<stepper> {
       // "addressid": id,
       // "amount": totalAmount,
 //"orderBy":EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList),
-    //  "orderBy": MRANDMRS.sharedprefs.getString("uid"),
+      //  "orderBy": MRANDMRS.sharedprefs.getString("uid"),
 // EcommerceApp.productID:EcommerceApp.sharedPreferences.getStringList(EcommerceApp.userCartList),
       //"method": "Cash On Delievery",
       "time": DateTime.now().millisecondsSinceEpoch.toString(),
-     // "paid": true,
+      // "paid": true,
     }).then((value) => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (c) => Orders())));
   }
@@ -255,7 +255,8 @@ class _stepperState extends State<stepper> {
           title: Text("Place Order"),
           content: PaymentPage(
             addressId: id,
-            totalAmount: totalAmount.toDouble(), key: null,
+            totalAmount: totalAmount.toDouble(),
+            key: null,
           ),
           state: StepState.indexed,
           isActive: true)
@@ -288,10 +289,10 @@ class _stepperState extends State<stepper> {
           child: Theme(
             data: ThemeData(
                 colorScheme: ColorScheme.light(
-                    primary: Colors.teal[900].withOpacity(0.4)),
+                    primary: Colors.brown[900].withOpacity(0.4)),
                 accentColor: Colors.grey,
                 primaryColor: Colors.grey[600],
-                buttonColor: Colors.green),
+                buttonColor: Colors.brown),
             child: Stepper(
               currentStep: this.currentStep,
               steps: steps,
@@ -300,6 +301,7 @@ class _stepperState extends State<stepper> {
                 print(currentStep);
                 if (currentStep == 0) {
                   if (cartno == 0) {
+                    context.read<CartController>().cartvaluefinder();
                     Toast.show("Add Items to Place Order", context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   } else {

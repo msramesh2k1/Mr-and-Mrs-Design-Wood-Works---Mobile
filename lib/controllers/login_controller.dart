@@ -24,9 +24,7 @@ class LoginController extends ChangeNotifier {
     FirebaseFirestore.instance.collection("users").doc(user.uid).set({
       "uid": user.uid,
       "email": user.email,
-      "phonenumber": user.phoneNumber,
-      "profile_picture": user.photoURL,
-      "name": user.displayName,
+     
     });
   }
 

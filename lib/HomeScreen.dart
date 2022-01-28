@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mr_and_mrs/Helper.dart';
+import 'package:mr_and_mrs/Stepper.dart';
 import 'package:mr_and_mrs/Widgets/Custom_Widgets.dart';
 import 'package:mr_and_mrs/Widgets/Responsive_widget.dart';
 import 'package:mr_and_mrs/categorypage.dart';
@@ -538,7 +539,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   width: 20,
                 ),
-                Icon(Icons.shopping_cart_outlined),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => StepperCart()));
+                    },
+                    child: Icon(Icons.shopping_cart_outlined)),
                 SizedBox(
                   width: 20,
                 )

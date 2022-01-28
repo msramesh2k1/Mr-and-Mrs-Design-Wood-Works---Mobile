@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_and_mrs/Helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mr_and_mrs/cartvalue.dart';
+import 'package:mr_and_mrs/controllers/cart_controller.dart';
 import 'package:mr_and_mrs/models/category_model.dart';
 import 'package:mr_and_mrs/services/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LoginController()),
         ChangeNotifierProvider.value(value: cartvalue()),
+        ChangeNotifierProvider(create: (context) => CartController()),
         StreamProvider<UserModel>.value(
           value: LoginController().user,
           initialData: null,

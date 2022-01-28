@@ -96,7 +96,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Route route = MaterialPageRoute(builder: (context) => stepper());
+          Route route = MaterialPageRoute(builder: (context) => StepperCart());
           Navigator.push(context, route);
         },
         backgroundColor: Colors.orange[400],
