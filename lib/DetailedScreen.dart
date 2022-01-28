@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:mr_and_mrs/cartvalue.dart';
 
 import 'ErrorAlert.dart';
+import 'controllers/cart_controller.dart';
 
 class DetailScreen extends StatefulWidget {
   final ProductModel productlist;
@@ -107,15 +108,17 @@ class _DetailScreenState extends State<DetailScreen> {
             right: 7,
             top: 7,
             child: CircleAvatar(
-              // child: Text(
-              //   cartvalueno().toString(),
-              //   style: GoogleFonts.lato(
-              //     textStyle: TextStyle(
-              //       color: Colors.white,
-              //       fontSize: 9,
-              //     ),
-              //   ),
-              // ),
+              child: Consumer<CartController>(builder: (context, value, __) {
+                return Text(
+                  value.cartvalue.toString(),
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9,
+                    ),
+                  ),
+                );
+              }),
               backgroundColor: Colors.red[900],
               radius: 8,
             ),

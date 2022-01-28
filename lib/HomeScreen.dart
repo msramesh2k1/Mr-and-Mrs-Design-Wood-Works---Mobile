@@ -9,6 +9,7 @@ import 'package:mr_and_mrs/Stepper.dart';
 import 'package:mr_and_mrs/Widgets/Custom_Widgets.dart';
 import 'package:mr_and_mrs/Widgets/Responsive_widget.dart';
 import 'package:mr_and_mrs/categorypage.dart';
+import 'package:mr_and_mrs/controllers/cart_controller.dart';
 import 'package:mr_and_mrs/services/database.dart';
 import 'package:mr_and_mrs/userScreen.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    context.read<CartController>().cartvaluefinder();
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       setState(() {
@@ -504,15 +506,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     right: 0,
                     top: 0,
                     child: CircleAvatar(
-                      child: Text(
-                        "3",
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
+                      child: Consumer<CartController>(
+                          builder: (context, value, __) {
+                        return Text(
+                          value.cartvalue.toString(),
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                       backgroundColor: Colors.red[900],
                       radius: 8,
                     ),
