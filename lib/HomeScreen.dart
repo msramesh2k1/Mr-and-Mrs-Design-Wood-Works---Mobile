@@ -490,16 +490,34 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Icon(Icons.account_circle_outlined));
                 }),
                 SizedBox(
-                  width: 20,
+                  width: 10,
                 ),
-                GestureDetector(
-                    onTap: () {
-                      MRANDMRS.sharedprefs.getString("uid") == null
-                          ? checkuser()
-                          : Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => StepperCart()));
-                    },
-                    child: Icon(Icons.shopping_cart_outlined)),
+                Stack(children: [
+                  Container(
+                    width: 40,
+                    child: Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 20,
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: CircleAvatar(
+                      child: Text(
+                        "3",
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                          ),
+                        ),
+                      ),
+                      backgroundColor: Colors.red[900],
+                      radius: 8,
+                    ),
+                  ),
+                ]),
                 SizedBox(
                   width: 20,
                 )
