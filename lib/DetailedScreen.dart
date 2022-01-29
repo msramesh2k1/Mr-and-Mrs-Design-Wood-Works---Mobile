@@ -1051,53 +1051,51 @@ class _DetailScreenState extends State<DetailScreen> {
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: GestureDetector(
                 onTap: () {
-                  // if (isincart) {
-                  //   setState(() {
-                  //     isincart = false;
-                  //   });
+                  if (isincart) {
+                    setState(() {
+                      isincart = false;
+                    });
+                    FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(MRANDMRS.sharedprefs.getString("uid"))
+                        .collection("cart")
+                        .doc(widget.productlist.id)
+                        .delete();
+                  } else {
+                    if (woodtype == " ") {
+                      showDialog(
+                          context: context,
+                          builder: (c) {
+                            return ErrorAlertDialog(message: "SELECT WOOD");
+                          });
+                    } else {
+                      setState(() {
+                        isincart = true;
+                      });
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(MRANDMRS.sharedprefs.getString("uid"))
+                          .collection("cart")
+                          .doc(widget.productlist.id)
+                          .set({
+                        //       "height":widget.queryDocumentSnapshot['height'],
+                        //       'width':widget.queryDocumentSnapshot['width'],
+                        //       "depth":widget.queryDocumentSnapshot['depth'],
+                        //       "weight":widget.queryDocumentSnapshot['weight'],
+                        //       "warranty":widget.queryDocumentSnapshot['warranty'],
 
-                  //   FirebaseFirestore.instance
-                  //       .collection("users")
-                  //       .doc(MRANDMRS.sharedprefs.getString("uid"))
-                  //       .collection("cart")
-                  //       .doc(widget.queryDocumentSnapshot["id"])
-                  //       .delete();
-                  // } else {
-                  //   if (woodtype == " ") {
-                  //     showDialog(
-                  //         context: context,
-                  //         builder: (c) {
-                  //           return ErrorAlertDialog(message: "SELECT WOOD");
-                  //         });
-                  //   } else {
-                  //     setState(() {
-                  //       isincart = true;
-                  //     });
-                  //     FirebaseFirestore.instance
-                  //         .collection("users")
-                  //         .doc(MRANDMRS.sharedprefs.getString("uid"))
-                  //         .collection("cart")
-                  //         .doc(widget.queryDocumentSnapshot["id"])
-                  //         .set({
-                  //       //       "height":widget.queryDocumentSnapshot['height'],
-                  //       //       'width':widget.queryDocumentSnapshot['width'],
-                  //       //       "depth":widget.queryDocumentSnapshot['depth'],
-                  //       //       "weight":widget.queryDocumentSnapshot['weight'],
-                  //       //       "warranty":widget.queryDocumentSnapshot['warranty'],
-
-                  //       "Description":
-                  //           widget.queryDocumentSnapshot["Description"],
-                  //       // "price": widget.queryDocumentSnapshot["price"],
-                  //       // "oprice": widget.queryDocumentSnapshot["oprice"],
-                  //       // "category": widget.queryDocumentSnapshot["category"],
-                  //       "name": widget.queryDocumentSnapshot["name"],
-                  //       "id": widget.queryDocumentSnapshot["id"],
-                  //       "mainimage": widget.queryDocumentSnapshot["mainimage"],
-                  //       "quanity": quanityvalue,
-                  //       "wood": woodtype
-                  //     });
-                  //   }
-                  // }
+                        "info": widget.productlist.info,
+                        // "price": widget.queryDocumentSnapshot["price"],
+                        // "oprice": widget.queryDocumentSnapshot["oprice"],
+                        // "category": widget.queryDocumentSnapshot["category"],
+                        "title": widget.productlist.title,
+                        "id": widget.productlist.id,
+                        "url": widget.productlist.url,
+                        "quanity": quanityvalue,
+                        "wood": woodtype
+                      });
+                    }
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(

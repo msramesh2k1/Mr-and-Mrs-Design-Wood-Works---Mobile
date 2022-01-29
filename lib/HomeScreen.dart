@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mr_and_mrs/CartPage.dart';
 import 'package:mr_and_mrs/Helper.dart';
 import 'package:mr_and_mrs/Stepper.dart';
 import 'package:mr_and_mrs/Widgets/Custom_Widgets.dart';
@@ -495,35 +496,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   width: 10,
                 ),
-                Stack(children: [
-                  Container(
-                    width: 40,
-                    child: Icon(
-                      Icons.shopping_cart_outlined,
-                      size: 20,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => StepperCart()));
+                  },
+                  child: Stack(children: [
+                    Container(
+                      width: 40,
+                      child: Icon(
+                        Icons.shopping_cart_outlined,
+                        size: 20,
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: CircleAvatar(
-                      child: Consumer<CartController>(
-                          builder: (context, value, __) {
-                        return Text(
-                          value.cartvalue.toString(),
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 9,
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: CircleAvatar(
+                        child: Consumer<CartController>(
+                            builder: (context, value, __) {
+                          return Text(
+                            value.cartvalue.toString(),
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 9,
+                              ),
                             ),
-                          ),
-                        );
-                      }),
-                      backgroundColor: Colors.red[900],
-                      radius: 8,
+                          );
+                        }),
+                        backgroundColor: Colors.red[900],
+                        radius: 8,
+                      ),
                     ),
-                  ),
-                ]),
+                  ]),
+                ),
                 SizedBox(
                   width: 20,
                 )
