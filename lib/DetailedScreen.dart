@@ -25,7 +25,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  // String imgurl;
+  String imgurl;
   String woodtype = " ";
   int quanityvalue = 1;
   int cartno = 0;
@@ -63,14 +63,14 @@ class _DetailScreenState extends State<DetailScreen> {
     //       });
     //     }
     //   });
-    //   String _imgurl = widget.queryDocumentSnapshot["mainimage"];
-    //   super.initState();
-    //   if (mounted) {
-    //     setState(() {
-    //       imgurl = _imgurl;
-    //     });
-    //   }
-    // }
+    String _imgurl = widget.productlist.url;
+    super.initState();
+
+    if (mounted) {
+      setState(() {
+        imgurl = _imgurl;
+      });
+    }
 
     // int cartvalueno() {
     //   FirebaseFirestore.instance
@@ -199,8 +199,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           image: DecorationImage(
-                              image: NetworkImage(widget.productlist.url),
-                              fit: BoxFit.contain),
+                              image: NetworkImage(imgurl), fit: BoxFit.contain),
                           color: Colors.transparent,
                         ),
                         height: 250,
@@ -209,64 +208,57 @@ class _DetailScreenState extends State<DetailScreen> {
                       SizedBox(
                         height: 10,
                       ),
-                      // Container(
-                      //   height: 80,
-                      //   child: StreamBuilder(
-                      //       stream: FirebaseFirestore.instance
-                      //           .collection("Items")
-                      //           .doc(widget.queryDocumentSnapshot["category"]
-                      //               .toString())
-                      //           .collection("Products")
-                      //           .doc(widget.queryDocumentSnapshot["id"]
-                      //               .toString())
-                      //           .collection("Images")
-                      //           .snapshots(),
-                      //       builder: (context, snapshot) {
-                      //         if (!snapshot.hasData) {
-                      //           return Text(
-                      //             'No Data...',
-                      //           );
-                      //         } else {
-                      //           return Scrollbar(
-                      //             child: ListView.builder(
-                      //                 scrollDirection: Axis.horizontal,
-                      //                 itemCount: snapshot.data.docs.length,
-                      //                 itemBuilder:
-                      //                     (BuildContext context, int index) {
-                      //                   return Padding(
-                      //                     padding: const EdgeInsets.all(10.0),
-                      //                     child: GestureDetector(
-                      //                       onTap: () {
-                      //                         setState(() {
-                      //                           imgurl = snapshot
-                      //                               .data.docs[index]['imgurl'];
-                      //                           print(imgurl);
-                      //                         });
-                      //                       },
-                      //                       child: Container(
-                      //                         width: 80,
-                      //                         decoration: BoxDecoration(
-                      //                             borderRadius:
-                      //                                 BorderRadius.circular(5),
-                      //                             color: Colors.red,
-                      //                             image: DecorationImage(
-                      //                                 image: NetworkImage(
-                      //                                     snapshot.data
-                      //                                             .docs[index]
-                      //                                         ['imgurl']),
-                      //                                 fit: BoxFit.cover)),
-                      //                       ),
-                      //                     ),
-                      //                   );
-                      //                 }),
-                      //           );
-                      //         }
-                      //       }),
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(5),
-                      //     color: Colors.grey[200],
-                      //   ),
-                      // )
+                      Container(
+                        height: 80,
+                        child: StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection("products")
+                                .doc(widget.productlist.id.toString())
+                                .collection("Images")
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return Text(
+                                  'No Data...',
+                                );
+                              } else {
+                                return ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: snapshot.data.docs.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              imgurl = snapshot.data.docs[index]
+                                                  ['url'];
+                                              print(imgurl);
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.white,
+                                                image: DecorationImage(
+                                                    image: NetworkImage(snapshot
+                                                        .data
+                                                        .docs[index]['url']),
+                                                    fit: BoxFit.cover)),
+                                          ),
+                                        ),
+                                      );
+                                    });
+                              }
+                            }),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey[200],
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -303,10 +295,10 @@ class _DetailScreenState extends State<DetailScreen> {
               height: 6,
             ),
             Text(
-              widget.productlist.title,
+              widget.productlist.info,
               style: GoogleFonts.lato(
                 textStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black54,
                     fontSize: 14,
                     letterSpacing: 0.5),
@@ -315,7 +307,7 @@ class _DetailScreenState extends State<DetailScreen> {
             SizedBox(height: 9),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.grey[800],
+                  color: Colors.brown[300],
                   borderRadius: BorderRadius.circular(2)),
               child: Padding(
                 padding: const EdgeInsets.only(
@@ -341,7 +333,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   children: [
                     SizedBox(height: 4),
                     Text(
-                      "₹",
+                      "₹ ",
                       style: GoogleFonts.lato(
                         textStyle: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -352,16 +344,16 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ],
                 ),
-                // Text(
-                //   widget.queryDocumentSnapshot["price"].toString(),
-                //   style: GoogleFonts.lato(
-                //     textStyle: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         color: Colors.black,
-                //         fontSize: 19,
-                //         letterSpacing: 0),
-                //   ),
-                // ),
+                Text(
+                  widget.productlist.price.toString(),
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 19,
+                        letterSpacing: 0),
+                  ),
+                ),
                 SizedBox(width: 10),
                 Column(
                   children: [
@@ -370,26 +362,26 @@ class _DetailScreenState extends State<DetailScreen> {
                       "₹",
                       style: GoogleFonts.lato(
                         textStyle: TextStyle(
-                            // decoration:TextDecoration.lineThrough,
+                            // decoration: TextDecoration.lineThrough,
                             fontWeight: FontWeight.bold,
                             color: Colors.black54,
-                            fontSize: 20,
+                            fontSize: 14,
                             letterSpacing: 2),
                       ),
                     ),
                   ],
                 ),
-                // Text(
-                //   widget.queryDocumentSnapshot["oprice"].toString(),
-                //   style: GoogleFonts.lato(
-                //     textStyle: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         decoration: TextDecoration.lineThrough,
-                //         color: Colors.black54,
-                //         fontSize: 12,
-                //         letterSpacing: 0),
-                //   ),
-                // ),
+                Text(
+                  widget.productlist.oriprice.toString(),
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.lineThrough,
+                        color: Colors.black54,
+                        fontSize: 12,
+                        letterSpacing: 0),
+                  ),
+                ),
                 SizedBox(
                   width: 6,
                 ),
@@ -408,102 +400,100 @@ class _DetailScreenState extends State<DetailScreen> {
             SizedBox(
               height: 10,
             ),
-            // Container(
-            //   height: 140,
-            //   child: StreamBuilder(
-            //       stream: FirebaseFirestore.instance
-            //           .collection("Items")
-            //           .doc(widget.queryDocumentSnapshot['category'])
-            //           .collection("Products")
-            //           .doc(widget.queryDocumentSnapshot["id"].toString())
-            //           .collection("WoodList")
-            //           .snapshots(),
-            //       builder: (context, snapshot) {
-            //         if (snapshot.data == null) {
-            //           return Center(
-            //             child: Text(
-            //               'Loading',
-            //             ),
-            //           );
-            //         } else {
-            //           return Scrollbar(
-            //             child: ListView.builder(
-            //                 scrollDirection: Axis.horizontal,
-            //                 itemCount: snapshot.data.docs.length,
-            //                 itemBuilder: (BuildContext context, int index) {
-            //                   return Padding(
-            //                     padding: const EdgeInsets.all(10.0),
-            //                     child: GestureDetector(
-            //                       onTap: () {
-            //                         setState(() {
-            //                           woodtype =
-            //                               snapshot.data.docs[index]['name'];
-            //                         });
-            //                         print(woodtype);
-            //                       },
-            //                       child: Container(
-            //                         decoration: BoxDecoration(
-            //                             color: Colors.white,
-            //                             borderRadius: BorderRadius.circular(5)),
-            //                         height: 80,
-            //                         width: 80,
-            //                         child: Column(
-            //                           mainAxisAlignment:
-            //                               MainAxisAlignment.start,
-            //                           children: [
-            //                             Container(
-            //                               decoration: BoxDecoration(
-            //                                   color: Colors.white,
-            //                                   image: DecorationImage(
-            //                                       image: NetworkImage(snapshot
-            //                                           .data
-            //                                           .docs[index]['image']),
-            //                                       fit: BoxFit.cover),
-            //                                   borderRadius:
-            //                                       BorderRadius.circular(5)),
-            //                               height: 70,
-            //                             ),
-            //                             Center(
-            //                               child: Text(
-            //                                 snapshot.data.docs[index]['name']
-            //                                     .toUpperCase(),
-            //                                 style: GoogleFonts.lato(
-            //                                   textStyle: TextStyle(
-            //                                       fontWeight: FontWeight.w900,
-            //                                       color: Colors.black,
-            //                                       fontSize: 10,
-            //                                       letterSpacing: 1),
-            //                                 ),
-            //                               ),
-            //                             ),
-            //                             Radio(
-            //                                 activeColor: Colors.green[900],
-            //                                 splashRadius: 20,
-            //                                 materialTapTargetSize:
-            //                                     MaterialTapTargetSize
-            //                                         .shrinkWrap,
-            //                                 autofocus: false,
-            //                                 value: snapshot.data.docs[index]
-            //                                     ['name'],
-            //                                 groupValue: woodtype,
-            //                                 onChanged: (val) {
-            //                                   setState(() {
-            //                                     woodtype = val;
-            //                                   });
-            //                                 })
-            //                           ],
-            //                         ),
-            //                       ),
-            //                     ),
-            //                   );
-            //                 }),
-            //           );
-            //         }
-            //       }),
-            //   decoration: BoxDecoration(
-            //       color: Colors.grey[200],
-            //       borderRadius: BorderRadius.circular(5)),
-            // ),
+            Container(
+              height: 140,
+              child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection("products")
+                      .doc(widget.productlist.id)
+                      .collection("WoodList")
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.data == null) {
+                      return Center(
+                        child: Text(
+                          'Loading',
+                        ),
+                      );
+                    } else {
+                      return Scrollbar(
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: snapshot.data.docs.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      woodtype =
+                                          snapshot.data.docs[index]['name'];
+                                    });
+                                    print(woodtype);
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    height: 80,
+                                    width: 80,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              image: DecorationImage(
+                                                  image: NetworkImage(snapshot
+                                                      .data
+                                                      .docs[index]['image']),
+                                                  fit: BoxFit.cover),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          height: 70,
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            snapshot.data.docs[index]['name']
+                                                .toUpperCase(),
+                                            style: GoogleFonts.lato(
+                                              textStyle: TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  color: Colors.black,
+                                                  fontSize: 10,
+                                                  letterSpacing: 1),
+                                            ),
+                                          ),
+                                        ),
+                                        Radio(
+                                            activeColor: Colors.green[900],
+                                            splashRadius: 20,
+                                            materialTapTargetSize:
+                                                MaterialTapTargetSize
+                                                    .shrinkWrap,
+                                            autofocus: false,
+                                            value: snapshot.data.docs[index]
+                                                ['name'],
+                                            groupValue: woodtype,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                woodtype = val;
+                                              });
+                                            })
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                      );
+                    }
+                  }),
+              decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(5)),
+            ),
             SizedBox(
               height: 15,
             ),
@@ -528,7 +518,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          // quanityvalue++;
+                          quanityvalue++;
                         });
                       },
                       icon: Icon(Icons.add_circle_outline)),
@@ -546,7 +536,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ),
                       decoration: BoxDecoration(
-                          color: Colors.grey[400],
+                          color: Colors.brown[200],
                           borderRadius: BorderRadius.circular(2)),
                       height: 30,
                       width: 30),
@@ -717,7 +707,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
-                                        widget.productlist.finish + " kg",
+                                        widget.productlist.weight.toString() +
+                                            " kg",
                                         style: GoogleFonts.lato(
                                           textStyle: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -761,19 +752,18 @@ class _DetailScreenState extends State<DetailScreen> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
-                                        // child: Text(
-                                        //   widget.queryDocumentSnapshot[
-                                        //           'warranty'] +
-                                        //       " Months Warranty",
-                                        //   style: GoogleFonts.lato(
-                                        //     textStyle: TextStyle(
-                                        //         fontWeight: FontWeight.bold,
-                                        //         color: Colors.black54,
-                                        //         fontSize: 12,
-                                        //         letterSpacing: 1),
-                                        //   ),
-                                        // ),
+                                      child: Text(
+                                        widget.productlist.warranty.toString() +
+                                            " Months Warranty".toUpperCase(),
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54,
+                                              fontSize: 12,
+                                              letterSpacing: 1),
                                         ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -788,7 +778,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
-                                        "MATERIAL",
+                                        "FINISH",
                                         style: GoogleFonts.lato(
                                           textStyle: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -809,7 +799,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
-                                        "ENGINEERED WOOD",
+                                        widget.productlist.finish.toUpperCase(),
                                         style: GoogleFonts.lato(
                                           textStyle: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -854,7 +844,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
-                                        "LIVING ROOM",
+                                        widget.productlist.roomtype
+                                            .toUpperCase(),
                                         style: GoogleFonts.lato(
                                           textStyle: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -1184,93 +1175,9 @@ class _DetailScreenState extends State<DetailScreen> {
             SizedBox(
               height: 10,
             ),
-            Text(
-              "Related Products",
-              style: GoogleFonts.josefinSans(
-                textStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                    fontSize: 16,
-                    letterSpacing: 1),
-              ),
-            ),
             SizedBox(
               height: 10,
             ),
-            // Container(
-            //   height: 180,
-            //   child: StreamBuilder(
-            //       stream: FirebaseFirestore.instance
-            //           .collection("SearchProducts")
-            //           .where("category",
-            //               isEqualTo: widget.queryDocumentSnapshot["category"])
-            //           .snapshots(),
-            //       builder: (context, snapshot) {
-            //         if (!snapshot.hasData) {
-            //           return Text(
-            //             'No Data...',
-            //           );
-            //         } else {
-            //           return Scrollbar(
-            //             child: ListView.builder(
-            //                 scrollDirection: Axis.horizontal,
-            //                 itemCount: snapshot.data.docs.length,
-            //                 itemBuilder: (BuildContext context, int index) {
-            //                   return Padding(
-            //                     padding: const EdgeInsets.all(10.0),
-            //                     child: GestureDetector(
-            //                       onTap: () {
-            //                         Navigator.push(
-            //                             context,
-            //                             MaterialPageRoute(
-            //                                 builder: (context) => DetailScreen(
-            //                                     queryDocumentSnapshot: snapshot
-            //                                         .data.docs[index])));
-            //                       },
-            //                       child: Container(
-            //                         decoration: BoxDecoration(
-            //                             color: Colors.white,
-            //                             borderRadius: BorderRadius.circular(5)),
-            //                         width: 150,
-            //                         child: Column(
-            //                           children: [
-            //                             Container(
-            //                               height: 142,
-            //                               width: 260,
-            //                               decoration: BoxDecoration(
-            //                                   borderRadius:
-            //                                       BorderRadius.circular(5),
-            //                                   color: Colors.red,
-            //                                   image: DecorationImage(
-            //                                       image: NetworkImage(
-            //                                           snapshot.data.docs[index]
-            //                                               ['mainimage']),
-            //                                       fit: BoxFit.cover)),
-            //                             ),
-            //                             Center(
-            //                               child: Text(
-            //                                   snapshot.data.docs[index]['name']
-            //                                       .toUpperCase(),
-            //                                   style: GoogleFonts.lato(
-            //                                     textStyle: TextStyle(
-            //                                         fontWeight: FontWeight.w900,
-            //                                         color: Colors.black,
-            //                                         fontSize: 12,
-            //                                         letterSpacing: 1),
-            //                                   )),
-            //                             ),
-            //                           ],
-            //                         ),
-            //                       ),
-            //                     ),
-            //                   );
-            //                 }),
-            //           );
-            //         }
-            //       }),
-            // decoration: BoxDecoration(
-            // color: Colors.white, borderRadius: BorderRadius.circular(5)),
-            // ),
             SizedBox(
                 child: Center(
                   child: Column(

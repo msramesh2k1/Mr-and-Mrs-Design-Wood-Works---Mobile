@@ -5,7 +5,10 @@ class ProductModel {
   int oriprice;
   String category;
   String roomtype;
-  int id;
+  String id;
+  String info;
+  int warranty;
+  int weight;
   String material;
   String finish;
   int width;
@@ -20,6 +23,9 @@ class ProductModel {
       this.category,
       this.roomtype,
       this.id,
+      this.warranty,
+      this.weight,
+      this.info,
       this.material,
       this.finish,
       this.width,
@@ -34,6 +40,9 @@ class ProductModel {
         category = parsedJSON['category'],
         roomtype = parsedJSON['roomtype'],
         id = parsedJSON['id'],
+        warranty = parsedJSON['warranty'],
+        weight = parsedJSON['weight'],
+        info = parsedJSON['info'],
         material = parsedJSON['material'],
         finish = parsedJSON['finish'],
         width = parsedJSON['width'],
