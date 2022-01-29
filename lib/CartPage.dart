@@ -77,68 +77,6 @@ class _cartState extends State<cart> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // appBar: AppBar(
-      //   leading: IconButton(
-      //       onPressed: () {
-      //         Navigator.pop(context);
-      //       },
-      //       icon: Icon(Icons.arrow_back_ios_sharp,
-      //           color: Colors.white, size: 12)),
-      //   leadingWidth: 25,
-      //   title: Text(
-      //     "Cart",
-      // style: GoogleFonts.josefinSans(
-      //       textStyle: TextStyle(
-      //           fontWeight: FontWeight.w700,
-      //           color: Colors.white,
-      //           fontSize: 18,
-      //           letterSpacing: 1),
-      //     ),
-      //   ),
-      //   backgroundColor: kBackgroundColor,
-      // ),
-
-      // floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-      // floatingActionButton: FloatingActionButton.extended(
-
-      //   onPressed: () {
-      //     cartno == 0 ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (c){
-      //       return HomeScreen();
-      //     })) :Navigator.push(context, MaterialPageRoute(builder: (c){
-      //       return Address(
-
-      //         // FirebaseFirestore.instance
-      //         //                 .collection("users")
-      //         //                 .doc(MRANDMRS.sharedprefs.getString("uid"))
-      //         //                 .collection("cart")
-      //         //                 .snapshots() ,
-      //         totalAmount: totalAmount.toDouble());
-      //     }));
-
-      //   },
-
-      //   label:cartno == 0?  Text(
-      //                             "Countiue Shopping",
-      //                             style: GoogleFonts.josefinSans(
-      //                               textStyle: TextStyle(
-      //                                   fontWeight: FontWeight.w600,
-      //                                   color: Colors.white,
-      //                                   fontSize: 13,
-      //                                   letterSpacing: 1),
-      //                             ),
-      //                           ):Text(
-      //                         "Place Order",
-      //                             style: GoogleFonts.josefinSans(
-      //                               textStyle: TextStyle(
-      //                                   fontWeight: FontWeight.w600,
-      //                                   color: Colors.white,
-      //                                   fontSize: 13,
-      //                                   letterSpacing: 1),
-      //                             ),
-      //                           ),
-      //   backgroundColor: kBackgroundColor,
-      //   //  icon: Icon(Icons.navigate_next)
-      // ),
       child: cartno == 0
           ? Container(
               height: 200,
