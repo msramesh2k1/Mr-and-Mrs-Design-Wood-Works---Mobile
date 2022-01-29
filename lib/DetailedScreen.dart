@@ -1085,9 +1085,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         //       "warranty":widget.queryDocumentSnapshot['warranty'],
 
                         "info": widget.productlist.info,
-                        // "price": widget.queryDocumentSnapshot["price"],
-                        // "oprice": widget.queryDocumentSnapshot["oprice"],
-                        // "category": widget.queryDocumentSnapshot["category"],
+                        "price": widget.productlist.price,
+                        "oprice": widget.productlist.oriprice,
+                        "category": widget.productlist.category,
                         "title": widget.productlist.title,
                         "id": widget.productlist.id,
                         "url": widget.productlist.url,
