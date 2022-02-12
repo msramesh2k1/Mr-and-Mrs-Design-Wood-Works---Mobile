@@ -90,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   Text(
                     'Mr & Mrs',
-                    style: GoogleFonts.josefinSans(
+                    style: GoogleFonts.novaSlim(
                       textStyle: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: kBackgroundColor,

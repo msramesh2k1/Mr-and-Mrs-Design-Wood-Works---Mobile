@@ -386,216 +386,245 @@ class _maineraddressState extends State<maineraddress> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-           leading: IconButton(
+        leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back_ios_sharp,
                 color: kBackgroundColor, size: 12)),
         leadingWidth: 25,
-    backgroundColor: Colors.white,
-    title: Text(
-            "Address",
-            style: GoogleFonts.josefinSans(
-              textStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: kBackgroundColor,
-                  fontSize: 18,
-                  letterSpacing: 0),
-            ),
+        backgroundColor: Colors.white,
+        title: Text(
+          "Address",
+          style: GoogleFonts.josefinSans(
+            textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: kBackgroundColor,
+                fontSize: 18,
+                letterSpacing: 0),
           ),
-elevation: 0,
         ),
-          body: Container(
-            color: Colors.white,
-            child: Column(children: [
-              GestureDetector(
-                onTap: () {
-                  Route route = MaterialPageRoute(builder: (c) => AddAddress());
-                  Navigator.push(context, route);
-                },
-                child: Container(
-                  child: Center(
-                    child: Text("ADD NEW ADDRESS",
-            style: GoogleFonts.lato(
-                textStyle: TextStyle(
-              letterSpacing: 2,
-              decoration: TextDecoration.none,
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
-            ))),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.teal[900].withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                  height: 45,
+        elevation: 0,
+      ),
+      body: Container(
+          color: Colors.white,
+          child: Column(children: [
+            GestureDetector(
+              onTap: () {
+                Route route = MaterialPageRoute(builder: (c) => AddAddress());
+                Navigator.push(context, route);
+              },
+              child: Container(
+                child: Center(
+                  child: Text("ADD NEW ADDRESS",
+                      style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                        letterSpacing: 2,
+                        decoration: TextDecoration.none,
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                      ))),
                 ),
+                decoration: BoxDecoration(
+                  color: Colors.brown[900].withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                height: 45,
               ),
-              SizedBox(
-                height: 10,
-              ),
-              SingleChildScrollView(
-                child: Container(
-                    height: MediaQuery.of(context).size.height - 150,
-                    child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection("users")
-              .doc(MRANDMRS.sharedprefs.getString("uid"))
-              .collection("address")
-              .snapshots(),
-          builder: (context, snapshot) {
-            return !snapshot.hasData
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : snapshot.data.docs.length == 0
-                    ? noAddressCard()
-                    : ListView.builder(
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  id = snapshot.data.docs[index]['id'];
-                                  print(id);
-                                });
-                                // print(address);
-                                // if (address.contains(
-                                //     snapshot.data.docs[index]['id'])) {
-                                //   setState(() {
-                                //     address.remove(snapshot
-                                //         .data.docs[index]["id"]);
-                                //   });
-                                // } else {
-                                //   setState(() {
-                                //     address.add(snapshot
-                                //         .data.docs[index]["id"]);
-                                //   });
-                                // }
-                              },
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                        snapshot.data.docs[index]
-                                            ['name'],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.josefinSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.none,
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.bold))),
-                                    Text(
-                                        snapshot.data.docs[index]
-                                                ['flatNumber'] +
-                                            " " +
-                                            snapshot.data.docs[index]
-                                                ['street1'],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.josefinSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.none,
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.bold))),
-                                    Text(
-                                        snapshot.data.docs[index]
-                                            ['street2'],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.josefinSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.none,
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.bold))),
-                                    Text(
-                                        snapshot.data.docs[index]
-                                                ['city'] +
-                                            "  -  " +
-                                            snapshot.data.docs[index]
-                                                ['pincode'],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.josefinSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.none,
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.bold))),
-                                    Text(
-                                        snapshot.data.docs[index]
-                                            ['state'],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.josefinSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.none,
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.bold))),
-                                    Text(
-                                        snapshot.data.docs[index]
-                                            ['country'],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.josefinSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.none,
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.bold))),
-                                    Text(
-                                        snapshot.data.docs[index]
-                                            ['phoneNumber'],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.josefinSans(
-                                            textStyle: TextStyle(
-                                                decoration:
-                                                    TextDecoration.none,
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.bold))),
-                                  ],
-                                ),
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  color: id ==
-                                          snapshot.data.docs[index]
-                                              ['id']
-                                      ? Colors.teal[900]
-                                          .withOpacity(0.2)
-                                      : Colors.grey[100],
-                                  borderRadius:
-                                      BorderRadius.circular(6),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                        itemCount: snapshot.data.docs.length,
-                        shrinkWrap: true,
-                      );
-          },
-                    )),
-              ),
-            ])),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            SingleChildScrollView(
+              child: Container(
+                  height: MediaQuery.of(context).size.height - 150,
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(MRANDMRS.sharedprefs.getString("uid"))
+                        .collection("address")
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      return !snapshot.hasData
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : snapshot.data.docs.length == 0
+                              ? noAddressCard()
+                              : ListView.builder(
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            id =
+                                                snapshot.data.docs[index]['id'];
+                                            print(id);
+                                          });
+                                          // print(address);
+                                          // if (address.contains(
+                                          //     snapshot.data.docs[index]['id'])) {
+                                          //   setState(() {
+                                          //     address.remove(snapshot
+                                          //         .data.docs[index]["id"]);
+                                          //   });
+                                          // } else {
+                                          //   setState(() {
+                                          //     address.add(snapshot
+                                          //         .data.docs[index]["id"]);
+                                          //   });
+                                          // }
+                                        },
+                                        child: Container(
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Text(
+                                                  snapshot.data.docs[index]
+                                                      ['name'],
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      GoogleFonts.josefinSans(
+                                                          textStyle: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))),
+                                              Text(
+                                                  snapshot.data.docs[index]
+                                                          ['flatNumber'] +
+                                                      " " +
+                                                      snapshot.data.docs[index]
+                                                          ['street1'],
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      GoogleFonts.josefinSans(
+                                                          textStyle: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))),
+                                              Text(
+                                                  snapshot.data.docs[index]
+                                                      ['street2'],
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      GoogleFonts.josefinSans(
+                                                          textStyle: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))),
+                                              Text(
+                                                  snapshot.data
+                                                          .docs[index]['city'] +
+                                                      "  -  " +
+                                                      snapshot.data.docs[index]
+                                                          ['pincode'],
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      GoogleFonts.josefinSans(
+                                                          textStyle: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))),
+                                              Text(
+                                                  snapshot.data.docs[index]
+                                                      ['state'],
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      GoogleFonts.josefinSans(
+                                                          textStyle: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))),
+                                              Text(
+                                                  snapshot.data.docs[index]
+                                                      ['country'],
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      GoogleFonts.josefinSans(
+                                                          textStyle: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))),
+                                              Text(
+                                                  snapshot.data.docs[index]
+                                                      ['phoneNumber'],
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      GoogleFonts.josefinSans(
+                                                          textStyle: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))),
+                                            ],
+                                          ),
+                                          height: 150,
+                                          decoration: BoxDecoration(
+                                            color: id ==
+                                                    snapshot.data.docs[index]
+                                                        ['id']
+                                                ? Colors.teal[900]
+                                                    .withOpacity(0.2)
+                                                : Colors.grey[100],
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  itemCount: snapshot.data.docs.length,
+                                  shrinkWrap: true,
+                                );
+                    },
+                  )),
+            ),
+          ])),
     );
   }
 

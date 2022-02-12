@@ -7,7 +7,7 @@ import 'package:mr_and_mrs/controllers/cart_controller.dart';
 import 'package:mr_and_mrs/models/category_model.dart';
 import 'package:mr_and_mrs/services/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'SplashScreen.dart';
+import 'users/views/SplashScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
