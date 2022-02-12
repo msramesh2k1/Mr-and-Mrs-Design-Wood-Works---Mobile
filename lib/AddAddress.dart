@@ -20,9 +20,11 @@ class AddAddress extends StatelessWidget {
   final addresspincode = TextEditingController();
 
   String addressid = DateTime.now().millisecondsSinceEpoch.toString();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
@@ -30,118 +32,196 @@ class AddAddress extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back_ios_sharp,
-                color: kBackgroundColor, size: 12)),
+                color: Colors.black, size: 20)),
         leadingWidth: 25,
-        title: Text(
-          "Add Address",
-          style: GoogleFonts.josefinSans(
-            textStyle: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: kBackgroundColor,
-                fontSize: 20,
-                letterSpacing: 0),
-          ),
-        ),
-        backgroundColor: Colors.brown[900].withOpacity(0.4),
+        backgroundColor: Colors.white,
         elevation: 0,
       ),
       key: scafoldKey,
-      body: Container(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            height: 700,
-            child: SingleChildScrollView(
-              child: Form(
-                key: formkey,
-                child: Column(children: [
-                  MyTextField(
-                    hint: "NAME",
-                    controller: addressName,
-                    height: 60,
+      body: SingleChildScrollView(
+        child: Container(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              height: 40,
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Text(
+                  "  Add Address",
+                  style: GoogleFonts.josefinSans(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                        fontSize: 20,
+                        letterSpacing: 0),
                   ),
-                  MyTextField(
-                    hint: "PHONE NUMBER",
-                    controller: addressPhoneNumber,
-                    height: 60,
-                  ),
-                  MyTextField(
-                    hint: "FLAT NO / DOOR NO",
-                    controller: addressFlatNumber,
-                    height: 60,
-                  ),
-                  MyTextField(
-                      hint: "STREET ADDRESS - LINE 1",
-                      controller: addressstreet1,
-                      height: 60),
-                  MyTextField(
-                      hint: "STREET ADDRESS - LINE 2",
-                      controller: addressstreet2,
-                      height: 60),
-                  MyTextField(
-                      hint: "DISTRICT",
-                      controller: addressDistrict,
-                      height: 60),
-                  MyTextField(
-                      hint: "STATE", controller: addressstate, height: 60),
-                  MyTextField(
-                      hint: "COUNTRY", controller: addresscountry, height: 60),
-                  MyTextField(
-                      hint: "PINCODE", controller: addresspincode, height: 60),
-                  SizedBox(
-                    height: MediaQuery.of(context).viewInsets.bottom,
-                  )
-                ]),
+                ),
               ),
             ),
-          ),
-          InkWell(
-            onTap: () {
-              if (formkey.currentState.validate()) {
-                FirebaseFirestore.instance
-                    .collection("users")
-                    .doc(MRANDMRS.sharedprefs.getString("uid"))
-                    .collection("address")
-                    .doc(DateTime.now().millisecondsSinceEpoch.toString())
-                    .set({
-                  "id": addressid.toString(),
-                  "name": addressName.text.trim(),
-                  "street1": addressstreet1.text.trim(),
-                  "street2": addressstreet2.text.trim(),
-                  "country": addresscountry.text.trim(),
-                  "state": addressstate.text.trim(),
-                  "pincode": addresspincode.text.trim(),
-                  "phoneNumber": addressPhoneNumber.text.trim(),
-                  "flatNumber": addressFlatNumber.text.trim(),
-                  "city": addressDistrict.text.trim(),
-                }).then((value) {
-                  Toast.show("Address added Successfully", context,
-                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  formkey.currentState.reset();
-                });
-                //     Navigator.pop(context);
-              }
-            },
-            child: Container(
-              child: Center(
-                child: Text("Add Address",
-                    style: GoogleFonts.josefinSans(
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 10,
+              color: Colors.white,
+            ),
+            Container(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "  Contact Info",
+                      style: GoogleFonts.josefinSans(
                         textStyle: TextStyle(
-                      letterSpacing: 0,
-                      decoration: TextDecoration.none,
-                      color: kBackgroundColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ))),
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
+                            fontSize: 20,
+                            letterSpacing: 0),
+                      ),
+                    ),
+                    MyTextField(
+                        hint: "Name",
+                        controller: addressName,
+                        height: 55,
+                        width: MediaQuery.of(context).size.width.toInt()),
+                    MyTextField(
+                        hint: "Phone Number",
+                        controller: addressPhoneNumber,
+                        height: 55,
+                        width: MediaQuery.of(context).size.width.toInt())
+                  ],
+                ),
               ),
-              color: Colors.teal[900].withOpacity(0.4),
-              height: 60,
+              color: Colors.white,
             ),
-          )
-        ],
-      )),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 400,
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "  Address Info",
+                      style: GoogleFonts.josefinSans(
+                        textStyle: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
+                            fontSize: 20,
+                            letterSpacing: 0),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        MyTextField(
+                          hint: "Pincode",
+                          width: 100,
+                          controller: addresspincode,
+                          height: 55,
+                        ),
+                        Expanded(
+                          child: MyTextField(
+                            hint: "City",
+                            width: 100,
+                            controller: addressDistrict,
+                            height: 55,
+                          ),
+                        ),
+                      ],
+                    ),
+                    MyTextField(
+                      hint: "State",
+                      controller: addressstate,
+                      width: MediaQuery.of(context).size.width.toInt(),
+                      height: 55,
+                    ),
+                    MyTextField(
+                      hint: "Locality / Area / Street",
+                      width: MediaQuery.of(context).size.width.toInt(),
+                      controller: addressstreet1,
+                      height: 55,
+                    ),
+                    MyTextField(
+                      hint: "Flat No / Building Name",
+                      width: MediaQuery.of(context).size.width.toInt(),
+                      controller: addressFlatNumber,
+                      height: 55,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          if (formkey.currentState.validate()) {
+                            FirebaseFirestore.instance
+                                .collection("users")
+                                .doc(MRANDMRS.sharedprefs.getString("uid"))
+                                .collection("address")
+                                .doc(DateTime.now()
+                                    .millisecondsSinceEpoch
+                                    .toString())
+                                .set({
+                              "id": addressid.toString(),
+                              "name": addressName.text.trim(),
+                              "street1": addressstreet1.text.trim(),
+                              "country": addresscountry.text.trim(),
+                              "state": addressstate.text.trim(),
+                              "pincode": addresspincode.text.trim(),
+                              "phoneNumber": addressPhoneNumber.text.trim(),
+                              "flatNumber": addressFlatNumber.text.trim(),
+                              "city": addressDistrict.text.trim(),
+                            }).then((value) {
+                              Toast.show("Address added Successfully", context,
+                                  duration: Toast.LENGTH_LONG,
+                                  gravity: Toast.BOTTOM);
+                              FocusScope.of(context).requestFocus(FocusNode());
+                              formkey.currentState.reset();
+                            });
+                            //     Navigator.pop(context);
+                          }
+                        },
+                        child: Container(
+                          height: 55,
+                          child: Center(
+                            child: Text(
+                              "Save Address",
+                              style: GoogleFonts.josefinSans(
+                                textStyle: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    letterSpacing: 0),
+                              ),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(8)),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              color: Colors.white,
+            ),
+          ],
+        )),
+      ),
     );
   }
 }
@@ -150,8 +230,9 @@ class MyTextField extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
   final int height;
+  final int width;
 
-  MyTextField({Key key, this.hint, this.controller, this.height})
+  MyTextField({Key key, this.hint, this.controller, this.height, this.width})
       : super(key: key);
 
   @override
@@ -159,10 +240,12 @@ class MyTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 4, right: 4, top: 4),
       child: Container(
+        height: height.toDouble(),
+        width: width.toDouble(),
         padding: EdgeInsets.only(left: 20.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: Colors.blueGrey[60],
+          color: Colors.blue[50],
         ),
         child: Container(
           height: height.toDouble(),
